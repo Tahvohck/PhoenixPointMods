@@ -32,12 +32,12 @@ namespace Tahvohck.PP_Weapons_basicstats
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public void SplashMod(Func<string, object, object> api = null)
         {
-            definitions_repo = GameUtl.GameComponent<DefRepository>();
-            Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
 
             var PierceType = new DamageKeywordPair();
 
 
+            DefRepository   definitions_repo = GameUtl.GameComponent<DefRepository>();
+            ModConfig       Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
             List<WeaponDef> WeaponList = definitions_repo.GetAllDefs<WeaponDef>().ToList();
             List<DamageKeywordDef> damageKeywords = definitions_repo.GetAllDefs<DamageKeywordDef>().ToList();
 
