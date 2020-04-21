@@ -42,7 +42,6 @@ namespace Tahvohck.PP_Weapons_basicstats
             }
             List<WeaponDef> WeaponList = definitions_repo.GetAllDefs<WeaponDef>().ToList();
             List<DamageKeywordDef> damageKeywords = definitions_repo.GetAllDefs<DamageKeywordDef>().ToList();
-            definitions_repo = null; // We'll never use this again.
 
             BasicUtil.Log($"Found {WeaponList.Count} weapons loaded into the game.", api);
             BasicUtil.Log($"Found {damageKeywords.Count} damage types loaded into the game.", api);
