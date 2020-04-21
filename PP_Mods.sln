@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponModifiers", "WeaponModifiers\WeaponModifiers.csproj", "{460F0C44-1544-49AF-A97A-BEAB8ED1BB75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PP_Weapons_basicstats", "PP_Weapons_basicstats\PP_Weapons_basicstats.csproj", "{9926E89F-6652-4511-AFD9-8A6B40ACB88E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModnixUtils", "ModnixUtils\ModnixUtils.csproj", "{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{460F0C44-1544-49AF-A97A-BEAB8ED1BB75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{460F0C44-1544-49AF-A97A-BEAB8ED1BB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{460F0C44-1544-49AF-A97A-BEAB8ED1BB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{460F0C44-1544-49AF-A97A-BEAB8ED1BB75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9926E89F-6652-4511-AFD9-8A6B40ACB88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9926E89F-6652-4511-AFD9-8A6B40ACB88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9926E89F-6652-4511-AFD9-8A6B40ACB88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9926E89F-6652-4511-AFD9-8A6B40ACB88E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
