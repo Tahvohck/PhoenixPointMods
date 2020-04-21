@@ -33,9 +33,6 @@ namespace Tahvohck.PP_Weapons_basicstats
         public void SplashMod(Func<string, object, object> api = null)
         {
 
-            var PierceType = new DamageKeywordPair();
-
-
             DefRepository   definitions_repo = GameUtl.GameComponent<DefRepository>();
             ModConfig       Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
             List<WeaponDef> WeaponList = definitions_repo.GetAllDefs<WeaponDef>().ToList();
