@@ -1,0 +1,5 @@
+{
+  "Id": "THV.WeaponDamageTypes",
+  "ConfigType": "Tahvohck.PP_Weapons_basicstats.ModConfig",
+  "LoadIndex": -300 // Very High priority
+}
