@@ -32,6 +32,8 @@ namespace Tahvohck.PP_Weapons_basicstats
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public void SplashMod(Func<string, object, object> api = null)
         {
+            // Technically, SplashMod isn't the right place to init this mod. However, it ensures a VERY
+            // early load, and it doesn't cause any issues. This means PPDefModifier can modify it.
 
             DefRepository   definitions_repo = GameUtl.GameComponent<DefRepository>();
             ModConfig       Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
