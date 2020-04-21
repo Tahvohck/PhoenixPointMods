@@ -20,7 +20,6 @@ namespace Tahvohck.PP_Weapons_basicstats
     public class MyMod
     {
         private static ModConfig Config;
-        private DefRepository definitions_repo;
 
         // PPML v0.1 entry point
         public static void Init() => new MyMod().SplashMod();
