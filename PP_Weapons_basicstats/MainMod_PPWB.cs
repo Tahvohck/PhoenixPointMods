@@ -36,9 +36,9 @@ namespace Tahvohck.PP_Weapons_basicstats
 
             DefRepository   definitions_repo = GameUtl.GameComponent<DefRepository>();
             if (api is null) {
-                ModConfig Config = new ModConfig();
+                Config = new ModConfig();
             } else {
-                ModConfig Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
+                Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
             }
             List<WeaponDef> WeaponList = definitions_repo.GetAllDefs<WeaponDef>().ToList();
             List<DamageKeywordDef> damageKeywords = definitions_repo.GetAllDefs<DamageKeywordDef>().ToList();
