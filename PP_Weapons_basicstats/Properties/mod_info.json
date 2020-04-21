@@ -1,5 +1,8 @@
 {
   "Id": "THV.WeaponDamageTypes",
   "ConfigType": "Tahvohck.PP_Weapons_basicstats.ModConfig",
-  "LoadIndex": -300 // Very High priority
+  "LoadIndex": -300, // Very High priority
+  "Name": "Basic Weapon Damage Types",
+  "Duration": "temp",
+  "lang": "*"
 }
