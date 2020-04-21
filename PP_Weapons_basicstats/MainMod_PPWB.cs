@@ -36,7 +36,11 @@ namespace Tahvohck.PP_Weapons_basicstats
             // early load, and it doesn't cause any issues. This means PPDefModifier can modify it.
 
             DefRepository   definitions_repo = GameUtl.GameComponent<DefRepository>();
-            ModConfig       Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
+            if (api is null) {
+                ModConfig Config = new ModConfig();
+            } else {
+                ModConfig Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
+            }
             List<WeaponDef> WeaponList = definitions_repo.GetAllDefs<WeaponDef>().ToList();
             List<DamageKeywordDef> damageKeywords = definitions_repo.GetAllDefs<DamageKeywordDef>().ToList();
             definitions_repo = null; // We'll never use this again.
