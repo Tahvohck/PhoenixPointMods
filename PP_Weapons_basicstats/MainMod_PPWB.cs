@@ -83,14 +83,26 @@ namespace Tahvohck.PP_Weapons_basicstats
         }
     }
 
+    /// <summary>
+    /// Extensions for a variety of PP default classes.
+    /// </summary>
     public static class PPWB_Extensions
     {
+        /// <summary>
+        /// Special case sort list
+        /// </summary>
         private static string[] damageKeywordDefSortSpecial = {
             "Damage_DamageKeywordDataDef",
             "Piercing_DamageKeywordDataDef",
             "Shredding_DamageKeywordDataDef",
             "Bleeding_DamageKeywordDataDef"
         };
+        /// <summary>
+        /// Extension method to sort damage keyword pairs based on their damage keyword def.
+        /// </summary>
+        /// <param name="dkpA"></param>
+        /// <param name="dkpB"></param>
+        /// <returns></returns>
         public static int CompareTo(this DamageKeywordPair dkpA, DamageKeywordPair dkpB)
         {
             // Setup
