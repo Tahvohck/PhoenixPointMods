@@ -76,10 +76,10 @@ namespace Tahvohck.PP_Weapons_basicstats
 #endif
                     }
                 }
-
                 weapon.DamagePayload.DamageKeywords.Sort( (x, y) => x.CompareTo(y));
-
             }
+
+            BasicUtil.Log("Done adding damage types.", api);
         }
     }
 
