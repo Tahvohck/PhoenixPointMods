@@ -11,9 +11,9 @@ namespace Tahvohck.PP_Weapons_basicstats
 {
     public class ModConfig
     {
-        public bool add_shred = false;
-        public bool add_pierce = false;
-        public bool add_bleed = false;
+        public bool add_shred = true;
+        public bool add_pierce = true;
+        public bool add_bleed = true;
     }
 
 
