@@ -11,9 +11,18 @@ namespace Tahvohck.PP_Weapons_basicstats
 {
     public class ModConfig
     {
+        public static readonly DateTime mostRecentVersion = new DateTime(year: 2020, month: 04, day: 21);
         public bool add_shred = true;
         public bool add_pierce = true;
         public bool add_bleed = true;
+        public DateTime configversion = mostRecentVersion;
+
+        internal void Upgrade()
+        {
+            if (configversion < mostRecentVersion) {
+                configversion = mostRecentVersion;
+            }
+        }
     }
 
 
