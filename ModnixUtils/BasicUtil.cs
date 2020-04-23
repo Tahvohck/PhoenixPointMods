@@ -26,6 +26,7 @@ namespace ModnixUtils
             "Shredding_DamageKeywordDataDef",
             "Bleeding_DamageKeywordDataDef"
         };
+
         /// <summary>
         /// [Extension method] Compares this instance with a specified <seealso cref="DamageKeywordPair"/>
         /// object and indicates whether this instance precedes, follows, or appears in the same position
