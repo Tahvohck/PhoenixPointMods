@@ -5,4 +5,4 @@
     - DamageKeywordPair.CompareTo()
     - DamageKeywordPair.Clone()
 
-Required to build: Add references to Assembly-CSharp and UnityEngine.CoreModule
+Required to build: Add references to `Assembly-CSharp` and `UnityEngine.CoreModule`
