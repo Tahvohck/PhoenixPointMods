@@ -35,9 +35,21 @@ namespace ModnixUtils
         /// <returns>-1 if A comes first, 1 if B comes first, 0 if they sort in the same place.</returns>
         public static int CompareTo(this DamageKeywordPair dkpA, DamageKeywordPair dkpB)
         {
+            return dkpA.DamageKeywordDef.CompareTo(dkpB.DamageKeywordDef);
+        }
+
+        /// <summary>
+        /// [Extension method] Compares this instance with a specified <seealso cref="DamageKeywordDef"/>
+        /// object and indicates whether this instance precedes, follows, or appears in the same position
+        /// in the sort order as the specified <seealso cref="DamageKeywordDef"/>.
+        /// </summary>
+        /// <param name="dkdB">The <seealso cref="DamageKeywordDef"/> to compare to this instance</param>
+        /// <returns>-1 if A comes first, 1 if B comes first, 0 if they sort in the same place.</returns>
+        public static int CompareTo(this DamageKeywordDef dkdA, DamageKeywordDef dkdB)
+        {
             // Setup
-            string nameA = dkpA.DamageKeywordDef.name;
-            string nameB = dkpB.DamageKeywordDef.name;
+            string nameA = dkdA.name;
+            string nameB = dkdB.name;
             int posA = Array.FindIndex(damageKeywordDefSortSpecial, x => x == nameA);
             int posB = Array.FindIndex(damageKeywordDefSortSpecial, x => x == nameB);
 
