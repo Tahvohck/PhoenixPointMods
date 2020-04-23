@@ -27,11 +27,12 @@ namespace ModnixUtils
             "Bleeding_DamageKeywordDataDef"
         };
         /// <summary>
-        /// Extension method to sort damage keyword pairs based on their damage keyword def.
+        /// [Extension method] Compares this instance with a specified <seealso cref="DamageKeywordPair"/>
+        /// object and indicates whether this instance precedes, follows, or appears in the same position
+        /// in the sort order as the specified <seealso cref="DamageKeywordPair"/>.
         /// </summary>
-        /// <param name="dkpA"></param>
-        /// <param name="dkpB"></param>
-        /// <returns></returns>
+        /// <param name="dkpB">The <seealso cref="DamageKeywordPair"/> to compare to this instance</param>
+        /// <returns>-1 if A comes first, 1 if B comes first, 0 if they sort in the same place.</returns>
         public static int CompareTo(this DamageKeywordPair dkpA, DamageKeywordPair dkpB)
         {
             // Setup
