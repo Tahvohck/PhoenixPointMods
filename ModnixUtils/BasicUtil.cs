@@ -20,7 +20,7 @@ namespace ModnixUtils
         /// <summary>
         /// Special case sort list
         /// </summary>
-        private static string[] damageKeywordDefSortSpecial = {
+        private static readonly string[] damageKeywordDefSortSpecial = {
             "Damage_DamageKeywordDataDef",
             "Piercing_DamageKeywordDataDef",
             "Shredding_DamageKeywordDataDef",
