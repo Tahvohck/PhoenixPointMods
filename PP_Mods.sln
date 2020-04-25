@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PP_Weapons_basicstats", "PP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModnixUtils", "ModnixUtils\ModnixUtils.csproj", "{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Independent Reverse Engineering", "Independent Reverse Engineering\Independent Reverse Engineering.csproj", "{3417E05A-9F97-452B-97D6-E3F573F8315C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3417E05A-9F97-452B-97D6-E3F573F8315C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3417E05A-9F97-452B-97D6-E3F573F8315C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3417E05A-9F97-452B-97D6-E3F573F8315C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3417E05A-9F97-452B-97D6-E3F573F8315C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
