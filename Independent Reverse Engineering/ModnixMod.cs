@@ -51,6 +51,11 @@ namespace Independent_Reverse_Engineering
                 def.ResourcePath.Contains("Independant")
             );
             BasicUtil.Log($"Readied {weaponDefs.Count} Independent weapons.", api);
+#if DEBUG
+            foreach (WeaponDef weapon in weaponDefs) {
+                BasicUtil.Log($"{weapon.ViewElementDef.DisplayName1.Localize()} - {weapon}", api);
+            }
+#endif
 
             string[] slots = { "Torso", "Legs", "Head" };
             List<ItemDef> armorDefs = gameRootDef.GetAllDefs<ItemDef>().ToList().FindAll(
@@ -62,6 +67,11 @@ namespace Independent_Reverse_Engineering
                 )
             );
             BasicUtil.Log($"Readied {armorDefs.Count} Independent armor items.", api);
+#if DEBUG
+            foreach (ItemDef armor in armorDefs) {
+                BasicUtil.Log($"{armor.ViewElementDef.DisplayName2.Localize()} - {armor}", api);
+            }
+#endif
         }
     }
 }
