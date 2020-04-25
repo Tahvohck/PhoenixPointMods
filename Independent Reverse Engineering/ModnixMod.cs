@@ -1,15 +1,11 @@
 ﻿using Base.Core;
 using Base.Defs;
 using ModnixUtils;
-using PhoenixPoint.Common.Entities.Addons;
 using PhoenixPoint.Common.Entities.Items;
 using PhoenixPoint.Tactical.Entities.Equipments;
-using PhoenixPoint.Tactical.Entities.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Independent_Reverse_Engineering
 {
