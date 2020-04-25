@@ -54,13 +54,10 @@ namespace Independent_Reverse_Engineering
             foreach (ItemDef item in tacticalItems) {
                 bool isWeapon = item.GetType() == typeof(WeaponDef);
 #if DEBUG
-                Base.UI.LocalizedTextBind localizeMe;
-                if (isWeapon) {
-                    localizeMe = item.ViewElementDef.DisplayName1;
-                } else {
-                    localizeMe = item.ViewElementDef.DisplayName2;
-                }
+                #region Debug output list items in tacticalItems
+                Base.UI.LocalizedTextBind localizeMe = item.GetDisplayName();
                 BasicUtil.Log($"{localizeMe.Localize()} - {item}", api);
+                #endregion
 #endif
             }
         }
