@@ -22,6 +22,7 @@ namespace Independent_Reverse_Engineering
     public class MyMod
     {
         private static ModConfig Config;
+        private static string[] allowedSlots = { "Torso", "Legs", "Head", "GunPoint" };
 
         // PPML v0.1 entry point
         public static void Init() => new MyMod().MainMod();
@@ -35,6 +36,7 @@ namespace Independent_Reverse_Engineering
         {
         }
 
+
         /// <summary>
         /// Called after basic assets are loaded, before the hottest year cinematic. Virtually the same time as PPML.
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
@@ -44,37 +46,39 @@ namespace Independent_Reverse_Engineering
         {
             api("log info", "New MainMod initialized");
             DefRepository gameRootDef = GameUtl.GameComponent<DefRepository>();
-
-            List<WeaponDef> weaponDefs = gameRootDef.GetAllDefs<WeaponDef>().ToList().FindAll(
-                def =>
-                def.ResourcePath.Contains("Independant") &&
-                def.RequiredSlotBinds.ToList().Exists(
-                    slotBind =>
-                    ((ItemSlotDef)slotBind.RequiredSlot).SlotName == "GunPoint"
-                )
+            
+            List<TacticalItemDef> tacticalItems = gameRootDef.GetAllDefs<TacticalItemDef>().ToList().FindAll(
+                new Predicate<TacticalItemDef>(FilterDefList)
             );
-            BasicUtil.Log($"Readied {weaponDefs.Count} Independent weapons.", api);
+            BasicUtil.Log($"Readied {tacticalItems.Count} Independent tactical items.", api);
 #if DEBUG
-            foreach (WeaponDef weapon in weaponDefs) {
-                BasicUtil.Log($"{weapon.ViewElementDef.DisplayName1.Localize()} - {weapon}", api);
+            foreach (ItemDef item in tacticalItems) {
+                if (item.GetType() == typeof(WeaponDef)) {
+                    BasicUtil.Log($"{item.ViewElementDef.DisplayName1.Localize()} - {item}", api);
+                } else {
+                    BasicUtil.Log($"{item.ViewElementDef.DisplayName2.Localize()} - {item}", api);
+                }
             }
 #endif
+        }
 
-            string[] slots = { "Torso", "Legs", "Head" };
-            List<ItemDef> armorDefs = gameRootDef.GetAllDefs<ItemDef>().ToList().FindAll(
-                def =>
-                def.ResourcePath.Contains("Independant") &&
-                def.RequiredSlotBinds.ToList().Exists(
-                    slotBind =>
-                    slots.Contains( ((ItemSlotDef)slotBind.RequiredSlot).SlotName )
-                )
-            );
-            BasicUtil.Log($"Readied {armorDefs.Count} Independent armor items.", api);
-#if DEBUG
-            foreach (ItemDef armor in armorDefs) {
-                BasicUtil.Log($"{armor.ViewElementDef.DisplayName2.Localize()} - {armor}", api);
-            }
-#endif
+
+        /// <summary>
+        /// Returns true if the item matches our filter parameters.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private static bool FilterDefList(ItemDef item)
+        {
+            // Result is true if item is under the 'Independant' resource path and
+            // one of the allowed slots exists in its slotbinds.
+            bool result = 
+                item.ResourcePath.Contains("Independant") &&
+                item.RequiredSlotBinds.ToList().Exists(
+                    slotBind => allowedSlots.Contains( 
+                        ((ItemSlotDef)slotBind.RequiredSlot).SlotName
+                ));
+            return result;
         }
     }
 }
