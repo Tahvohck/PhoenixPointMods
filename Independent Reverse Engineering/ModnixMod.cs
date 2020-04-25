@@ -19,13 +19,13 @@ namespace Independent_Reverse_Engineering
     }
 
 
-    public class MyMod
+    public class THV_Indie_Revenge
     {
         private static ModConfig Config;
         private static string[] allowedSlots = { "Torso", "Legs", "Head", "GunPoint" };
 
         // PPML v0.1 entry point
-        public static void Init() => new MyMod().MainMod();
+        public static void Init() => new THV_Indie_Revenge().MainMod();
 
         /// <summary>
         /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
