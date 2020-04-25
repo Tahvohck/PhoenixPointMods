@@ -3,6 +3,7 @@ using Base.Defs;
 using ModnixUtils;
 using PhoenixPoint.Common.Entities.Items;
 using PhoenixPoint.Tactical.Entities.Equipments;
+using PhoenixPoint.Tactical.Entities.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,15 +50,19 @@ namespace Independent_Reverse_Engineering
                 new Predicate<TacticalItemDef>(FilterDefList)
             );
             BasicUtil.Log($"Readied {tacticalItems.Count} Independent tactical items.", api);
-#if DEBUG
+
             foreach (ItemDef item in tacticalItems) {
-                if (item.GetType() == typeof(WeaponDef)) {
-                    BasicUtil.Log($"{item.ViewElementDef.DisplayName1.Localize()} - {item}", api);
+                bool isWeapon = item.GetType() == typeof(WeaponDef);
+#if DEBUG
+                Base.UI.LocalizedTextBind localizeMe;
+                if (isWeapon) {
+                    localizeMe = item.ViewElementDef.DisplayName1;
                 } else {
-                    BasicUtil.Log($"{item.ViewElementDef.DisplayName2.Localize()} - {item}", api);
+                    localizeMe = item.ViewElementDef.DisplayName2;
                 }
-            }
+                BasicUtil.Log($"{localizeMe.Localize()} - {item}", api);
 #endif
+            }
         }
 
 
