@@ -9,7 +9,7 @@ namespace ModnixUtils
     /// <summary>
     /// Actions for use in API function
     /// </summary>
-    public class ModnixAPIActions
+    public struct ModnixAPIActions
     {
         /// <summary>
         /// <para>Spec: Name of API to add</para>
@@ -39,7 +39,7 @@ namespace ModnixUtils
         /// <summary>
         /// Set of Log actions
         /// </summary>
-        public class log
+        public struct log
         {
             public const string normal      = "log";
             public const string critical    = "log crit";
