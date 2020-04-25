@@ -39,7 +39,7 @@ namespace ModnixUtils
         /// <summary>
         /// Set of Log actions
         /// </summary>
-        public struct log
+        public struct Log
         {
             public const string normal      = "log";
             public const string critical    = "log crit";

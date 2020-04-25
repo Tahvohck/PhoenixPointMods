@@ -8,7 +8,7 @@ namespace ModnixUtils
         public static void Log(object input, Func<string, object, object> api)
         {
             if (api is null) return;
-            api(ModnixAPIActions.log.info, input);
+            api(ModnixAPIActions.Log.info, input);
         }
     }
 
