@@ -33,7 +33,6 @@ namespace Independent_Reverse_Engineering
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public void SplashMod(Func<string, object, object> api = null)
         {
-            api("log info", "New SplashMod initialized");
         }
 
         /// <summary>
@@ -48,7 +47,11 @@ namespace Independent_Reverse_Engineering
 
             List<WeaponDef> weaponDefs = gameRootDef.GetAllDefs<WeaponDef>().ToList().FindAll(
                 def =>
-                def.ResourcePath.Contains("Independant")
+                def.ResourcePath.Contains("Independant") &&
+                def.RequiredSlotBinds.ToList().Exists(
+                    slotBind =>
+                    ((ItemSlotDef)slotBind.RequiredSlot).SlotName == "GunPoint"
+                )
             );
             BasicUtil.Log($"Readied {weaponDefs.Count} Independent weapons.", api);
 #if DEBUG
