@@ -157,6 +157,7 @@ namespace Independent_Reverse_Engineering
             return result;
         }
 
+
         enum ResearchGUIDSegments
         {
             Research,
