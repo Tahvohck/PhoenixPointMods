@@ -77,24 +77,34 @@ namespace Independent_Reverse_Engineering
                     researchUnocks[i] = ((WeaponDef)item).CompatibleAmmunition[i - 1];
                 }
 
+                string[] guidparts = item.Guid.Split('-');
+                string guidBase = string.Join("-", guidparts.Take(3));
+                string guidTail = "deadbeefbabe";
+                int typeInt;
+
                 #region Generate reverse engineering def
                 ReceiveItemResearchRequirementDef rirrDef = ScriptableObject.CreateInstance<ReceiveItemResearchRequirementDef>();
                 rirrDef.name = item.name + "_ReceiveItemResearchRequirementDef";
-                rirrDef.Guid = Guid.NewGuid().ToString();
+                typeInt = (int)ResearchGUIDSegments.ReceiveItemResearchRequirement;
+                rirrDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 rirrDef.ItemDef = item;
 
                 ItemResearchCostDef ircDef = ScriptableObject.CreateInstance<ItemResearchCostDef>();
                 ircDef.name = item.name + "_ItemResearchCostDef";
-                ircDef.Guid = Guid.NewGuid().ToString();
+                typeInt = (int)ResearchGUIDSegments.ItemResearchCost;
+                ircDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 ircDef.ItemDef = item;
 
                 ManufactureResearchRewardDef mrdDef = ScriptableObject.CreateInstance<ManufactureResearchRewardDef>();
                 mrdDef.name = item.name + "_ManufactureResearchRewardDef";
+                typeInt = (int)ResearchGUIDSegments.ManufactureResearchReward;
+                mrdDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 mrdDef.Items = researchUnocks;
 
                 ResearchDef reverseEngineerDef = ScriptableObject.CreateInstance<ResearchDef>();
                 reverseEngineerDef.name = item.name + "_ResearchDef";
-                reverseEngineerDef.Guid = Guid.NewGuid().ToString();
+                typeInt = (int)ResearchGUIDSegments.Research;
+                reverseEngineerDef.Guid = $"{guidBase}-{typeInt:X4}-{guidTail}";
                 reverseEngineerDef.Costs = new ResearchCostDef[] { ircDef };
                 reverseEngineerDef.ResearchCost = 100;
                 reverseEngineerDef.Tags = new ResearchTagDef[] { optional };
@@ -119,7 +129,12 @@ namespace Independent_Reverse_Engineering
 #if DEBUG
             BasicUtil.Log($"Looking for GUID: {guid}", api);
             DefRepository temp = GameUtl.GameComponent<DefRepository>();
-            BasicUtil.Log(temp.GetDef(guid).name, api);
+            ResearchDef rDef = (ResearchDef)temp.GetDef(guid);
+            BasicUtil.Log(rDef.name, api);
+            BasicUtil.Log(rDef.Guid, api);
+            BasicUtil.Log(rDef.Costs[0].Guid, api);
+            BasicUtil.Log(rDef.Unlocks[0].Guid, api);
+            BasicUtil.Log(rDef.RevealRequirements.Container[0].Requirements[0].Guid, api);
 #endif
         }
 
@@ -140,6 +155,14 @@ namespace Independent_Reverse_Engineering
                         ((ItemSlotDef)slotBind.RequiredSlot).SlotName
                 ));
             return result;
+        }
+
+        enum ResearchGUIDSegments
+        {
+            Research,
+            ReceiveItemResearchRequirement,
+            ItemResearchCost,
+            ManufactureResearchReward,
         }
     }
 }
