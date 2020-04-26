@@ -1,0 +1,15 @@
+{
+  "Id": "$username$.$safeprojectname$",
+  "Author": "",
+  "Name": "$projectname$",
+  "Description": "",
+  "Version": "0.1",
+  "LoadIndex": 0,   // Negative priorities => higher priorities
+  "Duration": null,
+  "lang": "*",
+  "Contact": null,  // Freestyle dictionary
+  "Url": null,      // Freestyle dictionary
+  "Requires": [],
+  "Disables": [],
+  "ConfigType": "$safeprojectname$.ModConfig"
+}
