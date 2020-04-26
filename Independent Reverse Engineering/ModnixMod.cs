@@ -99,6 +99,7 @@ namespace Independent_Reverse_Engineering
                 reverseEngineerDef.ResearchCost = 100;
                 reverseEngineerDef.Tags = new ResearchTagDef[] { optional };
                 reverseEngineerDef.ValidForFactions = new List<GeoFactionDef> { PhoenixPointFaction };
+                reverseEngineerDef.Unlocks = new ResearchRewardDef[] { mrdDef };
                 reverseEngineerDef.RevealRequirements.Container = new ReseachRequirementDefOpContainer[] {
                     new ReseachRequirementDefOpContainer() {
                         Operation = ResearchContainerOperation.ALL,
