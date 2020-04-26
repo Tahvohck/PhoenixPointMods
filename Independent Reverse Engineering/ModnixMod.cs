@@ -2,11 +2,17 @@
 using Base.Defs;
 using ModnixUtils;
 using PhoenixPoint.Common.Entities.Items;
+using PhoenixPoint.Geoscape.Entities.Research;
+using PhoenixPoint.Geoscape.Entities.Research.Cost;
+using PhoenixPoint.Geoscape.Entities.Research.Requirement;
+using PhoenixPoint.Geoscape.Entities.Research.Reward;
+using PhoenixPoint.Geoscape.Levels;
 using PhoenixPoint.Tactical.Entities.Equipments;
 using PhoenixPoint.Tactical.Entities.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Independent_Reverse_Engineering
 {
@@ -51,6 +57,7 @@ namespace Independent_Reverse_Engineering
             );
             BasicUtil.Log($"Readied {tacticalItems.Count} Independent tactical items.", api);
 
+            string guid = "";
             foreach (ItemDef item in tacticalItems) {
                 bool isWeapon = item.GetType() == typeof(WeaponDef);
 #if DEBUG
@@ -59,7 +66,60 @@ namespace Independent_Reverse_Engineering
                 BasicUtil.Log($"{localizeMe.Localize()} - {item}", api);
                 #endregion
 #endif
+                ResearchTagDef optional = (ResearchTagDef)gameRootDef.GetDef("08191866-ff38-9e74-abd7-cb484188911a");
+                GeoFactionDef PhoenixPointFaction = (GeoFactionDef)gameRootDef.GetDef("8be7e872-0ad2-a2a4-7bee-c980ed304a8a");
+
+                // 1 + length of compatible ammo list
+                int researchUnlockLength = 1 + ((isWeapon) ? ((WeaponDef)item).CompatibleAmmunition.Length : 0);
+                ItemDef[] researchUnocks = new ItemDef[researchUnlockLength];
+                researchUnocks[0] = item;
+                for (int i = 1; i < researchUnlockLength; i++) {
+                    researchUnocks[i] = ((WeaponDef)item).CompatibleAmmunition[i - 1];
+                }
+
+                #region Generate reverse engineering def
+                ReceiveItemResearchRequirementDef rirrDef = ScriptableObject.CreateInstance<ReceiveItemResearchRequirementDef>();
+                rirrDef.name = item.name + "_ReceiveItemResearchRequirementDef";
+                rirrDef.Guid = Guid.NewGuid().ToString();
+                rirrDef.ItemDef = item;
+
+                ItemResearchCostDef ircDef = ScriptableObject.CreateInstance<ItemResearchCostDef>();
+                ircDef.name = item.name + "_ItemResearchCostDef";
+                ircDef.Guid = Guid.NewGuid().ToString();
+                ircDef.ItemDef = item;
+
+                ManufactureResearchRewardDef mrdDef = ScriptableObject.CreateInstance<ManufactureResearchRewardDef>();
+                mrdDef.name = item.name + "_ManufactureResearchRewardDef";
+                mrdDef.Items = researchUnocks;
+
+                ResearchDef reverseEngineerDef = ScriptableObject.CreateInstance<ResearchDef>();
+                reverseEngineerDef.name = item.name + "_ResearchDef";
+                reverseEngineerDef.Guid = Guid.NewGuid().ToString();
+                reverseEngineerDef.Costs = new ResearchCostDef[] { ircDef };
+                reverseEngineerDef.ResearchCost = 100;
+                reverseEngineerDef.Tags = new ResearchTagDef[] { optional };
+                reverseEngineerDef.ValidForFactions = new List<GeoFactionDef> { PhoenixPointFaction };
+                reverseEngineerDef.RevealRequirements.Container = new ReseachRequirementDefOpContainer[] {
+                    new ReseachRequirementDefOpContainer() {
+                        Operation = ResearchContainerOperation.ALL,
+                        Requirements = new ResearchRequirementDef[] {
+                            rirrDef
+                        }
+                    }
+                };
+#if DEBUG
+                BasicUtil.Log($"{researchUnocks.Length} items prepared for the rDef.", api);
+#endif
+                #endregion
+
+                gameRootDef.CreateRuntimeDef(reverseEngineerDef, guid: reverseEngineerDef.Guid);
+                guid = reverseEngineerDef.Guid;
             }
+#if DEBUG
+            BasicUtil.Log($"Looking for GUID: {guid}", api);
+            DefRepository temp = GameUtl.GameComponent<DefRepository>();
+            BasicUtil.Log(temp.GetDef(guid).name, api);
+#endif
         }
 
 
