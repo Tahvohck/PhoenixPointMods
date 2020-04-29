@@ -218,7 +218,6 @@ namespace ModnixUtils
         public static string Render(this ResearchRequirementDef arg1, string prefix = "", bool newline = false, int depth = 0)
         {
             return arg1.name;
-            throw new NotImplementedException();
         }
 
         public static string HandleArrayItems<T>(IList<T> arr, Func<T, string, bool, int, string> Render, string prefix = "", bool newline = true, int depth = 0)
