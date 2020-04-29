@@ -91,9 +91,9 @@ namespace ModnixUtils
             };
         }
         /// <summary>
-        /// Return a string representation of a researchDef.
+        /// Return a string representation of a <see cref="ResearchDef"/>.
         /// </summary>
-        /// <param name="rDef"></param>
+        /// <param name="prefix">Optional prefix to add to each line of the string.</param>
         /// <returns></returns>
         public static string Repr(this ResearchDef rDef, string prefix = "")
         {
