@@ -3,7 +3,7 @@
   "Author": "",
   "Name": "$projectname$",
   "Description": "",
-  "Version": "0.1",
+  //"Version": "0.1", // Explicit Version info. Defaults to the DLL version if you leave this commented.
   "LoadIndex": 0,   // Negative priorities => higher priorities
   "Duration": null,
   "lang": "*",

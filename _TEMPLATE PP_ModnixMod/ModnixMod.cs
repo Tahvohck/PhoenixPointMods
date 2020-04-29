@@ -21,18 +21,22 @@ namespace $safeprojectname$
 
     public class MyMod
     {
-        private static ModConfig Config;
+#pragma warning disable IDE0044 // Add readonly modifier (This prevents the IDE from whining about the lack of assignment)
+    private static ModConfig Config;
+#pragma warning restore IDE0044 // Add readonly modifier
 
-        /// <summary>PPML v0.1 entry point</summary>
-        public static void Init() => new MyMod().MainMod();
+    /// <summary>PPML v0.1 entry point</summary>
+    public static void Init() => MainMod();
 
         /// <summary>
         /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#SplashMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public void SplashMod(Func<string, object, object> api = null)
+        public static void SplashMod(Func<string, object, object> api = null)
         {
+            // ADVICE: Don't use SplashMod unless you need it!
+            // Loading things early in the game will slow down the game's initial load.
             api("log info", "New SplashMod initialized");
         }
 
@@ -41,8 +45,10 @@ namespace $safeprojectname$
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public void MainMod(Func<string, object, object> api = null)
+        public static void MainMod(Func<string, object, object> api = null)
         {
+            // Un-comment this to be able to use the configuration class in your code.
+            //Config = api("config", null) as ModConfig ?? new ModConfig();
             api("log info", "New MainMod initialized");
         }
     }
