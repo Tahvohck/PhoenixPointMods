@@ -124,16 +124,16 @@ namespace ModnixUtils
             string prefix2 = "    ";
             bool level2newline = true;
             int initial_indent = 0;
-            string strNotForDLC =       HandleArrayItems(rDef.NotEnabledForDLC, RenderEntitlement, prefix2, level2newline, initial_indent);
-            string strInitialStates =   HandleArrayItems(rDef.InitialStates, RenderInitalState, prefix2, level2newline, initial_indent);
-            string strDiploShift =      HandleArrayItems(rDef.DiplomacyShift, RenderDiplomaticShift, prefix2, level2newline, initial_indent);
-            string strUnlocks =         HandleArrayItems(rDef.Unlocks, RenderUnlock, prefix2, level2newline, initial_indent);
-            string strInvalidatedBy =   HandleArrayItems(rDef.InvalidatedBy, RenderResearch, prefix2, level2newline, initial_indent);
-            string strCosts =           HandleArrayItems(rDef.Costs, RenderCost, prefix2, level2newline, initial_indent);
-            string strTags =            HandleArrayItems(rDef.Tags, RenderTag, prefix2, level2newline, initial_indent);
-            string strValidFor =        HandleArrayItems(rDef.ValidForFactions, RenderFaction, prefix2, level2newline, initial_indent);
-            string strUnlockReq =       HandleArrayItems(rDef.UnlockRequirements.Container, RenderResearchDefOpContainer, prefix2, level2newline, initial_indent);
-            string strRevealReq =       HandleArrayItems(rDef.RevealRequirements.Container, RenderResearchDefOpContainer, prefix2, level2newline, initial_indent);
+            string strNotForDLC =       HandleArrayItems(rDef.NotEnabledForDLC, Render, prefix2, level2newline, initial_indent);
+            string strInitialStates =   HandleArrayItems(rDef.InitialStates, Render, prefix2, level2newline, initial_indent);
+            string strDiploShift =      HandleArrayItems(rDef.DiplomacyShift, Render, prefix2, level2newline, initial_indent);
+            string strUnlocks =         HandleArrayItems(rDef.Unlocks, Render, prefix2, level2newline, initial_indent);
+            string strInvalidatedBy =   HandleArrayItems(rDef.InvalidatedBy, Render, prefix2, level2newline, initial_indent);
+            string strCosts =           HandleArrayItems(rDef.Costs, Render, prefix2, level2newline, initial_indent);
+            string strTags =            HandleArrayItems(rDef.Tags, Render, prefix2, level2newline, initial_indent);
+            string strValidFor =        HandleArrayItems(rDef.ValidForFactions, Render, prefix2, level2newline, initial_indent);
+            string strUnlockReq =       HandleArrayItems(rDef.UnlockRequirements.Container, Render, prefix2, level2newline, initial_indent);
+            string strRevealReq =       HandleArrayItems(rDef.RevealRequirements.Container, Render, prefix2, level2newline, initial_indent);
 
             string reprStr = $"===== RESEARCHDEF REPR BEGINS =====" +
                 $"\n{prefix}rdef:       {rDef.name} {{{rDef.Guid}}}" +
@@ -160,18 +160,18 @@ namespace ModnixUtils
             return reprStr;
         }
 
-        public static string RenderEntitlement(Base.Platforms.EntitlementDef dlcDef, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this Base.Platforms.EntitlementDef dlcDef, string prefix = "", bool newline = false, int depth = 0)
         {
             if (dlcDef is null) return "null";
             return dlcDef.Name.Localize();
         }
 
-        private static string RenderInitalState(ResearchDef.InitialResearchState state, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchDef.InitialResearchState state, string prefix = "", bool newline = false, int depth = 0)
         {
             return $"{state.Faction.GetPPName(),-10} - {state.State}";
         }
 
-        private static string RenderDiplomaticShift(DiplomacyRelation relation, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this DiplomacyRelation relation, string prefix = "", bool newline = false, int depth = 0)
         {
             if (relation is null) return "null";
             return
@@ -180,42 +180,42 @@ namespace ModnixUtils
                 $"{relation.LeaderDiplomacy}";
         }
 
-        private static string RenderUnlock(ResearchRewardDef reward, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchRewardDef reward, string prefix = "", bool newline = false, int depth = 0)
         {
             if (reward is null) return "";
             return reward.name;
         }
 
-        private static string RenderResearch(ResearchDef research, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchDef research, string prefix = "", bool newline = false, int depth = 0)
         {
             if (research is null) return "null";
             return $"{research.name} {{{research.Guid}}}";
         }
 
-        private static string RenderCost(ResearchCostDef costDef, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchCostDef costDef, string prefix = "", bool newline = false, int depth = 0)
         {
             if (costDef is null || costDef.LocalizationText is null) return "null";
             return $"{costDef.LocalizationText.Localize()}: {costDef.Amount}";
         }
 
-        private static string RenderTag(ResearchTagDef tag, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchTagDef tag, string prefix = "", bool newline = false, int depth = 0)
         {
             if (tag is null) return "null";
             return tag.name;
         }
 
-        private static string RenderFaction(GeoFactionDef faction, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this GeoFactionDef faction, string prefix = "", bool newline = false, int depth = 0)
         {
             if (faction is null) return "null";
             return faction.GetPPName();
         }
 
-        private static string RenderResearchDefOpContainer(ReseachRequirementDefOpContainer arg, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ReseachRequirementDefOpContainer arg, string prefix = "", bool newline = false, int depth = 0)
         {
-            return $"{arg.Operation}: {HandleArrayItems(arg.Requirements, RenderResearchDefOp, prefix, newline, depth)}";
+            return $"{arg.Operation}: {HandleArrayItems(arg.Requirements, Render, prefix, newline, depth)}";
         }
 
-        private static string RenderResearchDefOp(ResearchRequirementDef arg1, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchRequirementDef arg1, string prefix = "", bool newline = false, int depth = 0)
         {
             return arg1.name;
             throw new NotImplementedException();
