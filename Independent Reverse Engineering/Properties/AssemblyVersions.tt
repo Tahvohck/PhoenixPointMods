@@ -19,6 +19,6 @@ using System.Reflection;
 <#+
 	int Major = 1;
 	int Minor = 0;
-	int Patch = 1;
+	int Patch = 2;
     int RevisionNumber = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year,1,1)).TotalDays;
 #>
