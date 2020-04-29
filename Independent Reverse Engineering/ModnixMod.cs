@@ -152,7 +152,9 @@ namespace Independent_Reverse_Engineering
 #endif
 #endif
 #endregion
-
+                gameRootDef.CreateRuntimeDef(rirrDef, rirrDef.GetType(), rirrDef.Guid);
+                gameRootDef.CreateRuntimeDef(ircDef,  ircDef.GetType(),  ircDef.Guid);
+                gameRootDef.CreateRuntimeDef(mrdDef,  mrdDef.GetType(),  mrdDef.Guid);
                 gameRootDef.CreateRuntimeDef(reverseEngineerDef, guid: reverseEngineerDef.Guid);
                 guid = reverseEngineerDef.Guid;
             }
