@@ -34,15 +34,6 @@ namespace Independent_Reverse_Engineering
         // PPML v0.1 entry point
         public static void Init() => MainMod();
 
-        /// <summary>
-        /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
-        /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#SplashMod
-        /// </summary>
-        /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public static void SplashMod(Func<string, object, object> api = null)
-        {
-        }
-
 
         /// <summary>
         /// Called after basic assets are loaded, before the hottest year cinematic. Virtually the same time as PPML.
