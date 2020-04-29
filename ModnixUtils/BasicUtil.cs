@@ -138,12 +138,12 @@ namespace ModnixUtils
             string reprStr = $"===== RESEARCHDEF REPR BEGINS =====" +
                 $"\n{prefix}rdef:       {rDef.name} {{{rDef.Guid}}}" +
                 $"\n{prefix}ID:         {rDef.Id}" +
-                $"\n{prefix}ResCost:    {rDef.ResearchCost}" +
+                $"\n{prefix}LearnCost:  {rDef.ResearchCost}" +
                 $"\n{prefix}Faction:    {rDef.Faction}" +
                 $"\n{prefix}DLC Off:    {strNotForDLC}" +
                 $"\n{prefix}DLC:        {rDef.DLC}" +
                 $"\n{prefix}Cutscene:   {rDef.TriggerCutscene}" +
-                $"\n{prefix}Init:       {strInitialStates}" +
+                $"\n{prefix}InitState:  {strInitialStates}" +
                 $"\n{prefix}Diplomacy:  {strDiploShift}" +
                 $"\n{prefix}RSC Reward: {rDef.Resources}" +
                 $"\n{prefix}Unlocks:    {strUnlocks}" +
