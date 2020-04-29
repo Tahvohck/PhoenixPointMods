@@ -1,4 +1,6 @@
-﻿using Base.Core;
+﻿//#define COMPAREMANY
+#define NOISY
+using Base.Core;
 using Base.Defs;
 using ModnixUtils;
 using PhoenixPoint.Common.Entities.Items;
@@ -124,13 +126,19 @@ namespace Independent_Reverse_Engineering
                 };
 #if DEBUG
                 BasicUtil.Log($"{researchUnocks.Length} items prepared for the rDef.", api);
+#if NOISY
+                BasicUtil.Log(reverseEngineerDef.Repr(), api);
 #endif
-                #endregion
+#endif
+#endregion
 
                 gameRootDef.CreateRuntimeDef(reverseEngineerDef, guid: reverseEngineerDef.Guid);
                 guid = reverseEngineerDef.Guid;
             }
 #if DEBUG
+            foreach (GeoFactionDef fact in gameRootDef.GetAllDefs<GeoFactionDef>().ToList()) {
+                BasicUtil.Log(fact.Render(), api);
+            }
             BasicUtil.Log($"Looking for GUID: {guid}", api);
             DefRepository temp = GameUtl.GameComponent<DefRepository>();
             ResearchDef rDef = (ResearchDef)temp.GetDef(guid);
@@ -139,6 +147,24 @@ namespace Independent_Reverse_Engineering
             BasicUtil.Log(rDef.Costs[0].Guid, api);
             BasicUtil.Log(rDef.Unlocks[0].Guid, api);
             BasicUtil.Log(rDef.RevealRequirements.Container[0].Requirements[0].Guid, api);
+
+            BasicUtil.Log(
+                rDef.Repr(),
+                api);
+            BasicUtil.Log(
+                // Reverse Engineering example
+                ((ResearchDef)temp.GetDef("15d2170b-469b-0341-22d4-a8b4d90eefb8")).Repr(),
+                api);
+#if COMPAREMANY
+            BasicUtil.Log(
+                // Capture research
+                ((ResearchDef)temp.GetDef("c7b3f8ab-8c90-0343-823b-c966d2c4edb8")).Repr(),
+                api);
+            BasicUtil.Log(
+                // Research that rewards multiple resources
+                temp.GetAllDefs<ResearchDef>().ToList().Find( x => x.Resources.Count > 1).Repr(),
+                api);
+#endif
 #endif
         }
 
