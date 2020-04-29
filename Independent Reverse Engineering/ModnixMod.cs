@@ -70,6 +70,9 @@ namespace Independent_Reverse_Engineering
 #endif
                 ResearchTagDef optional = (ResearchTagDef)gameRootDef.GetDef("08191866-ff38-9e74-abd7-cb484188911a");
                 GeoFactionDef PhoenixPointFaction = (GeoFactionDef)gameRootDef.GetDef("8be7e872-0ad2-a2a4-7bee-c980ed304a8a");
+                GeoFactionDef DisciplesOfAnuFaction = (GeoFactionDef)gameRootDef.GetDef("edc6783a-be00-1a84-2b97-2fe1e0fc5448");
+                GeoFactionDef NewJerichoFaction = (GeoFactionDef)gameRootDef.GetDef("d31c78b9-ff0e-8b94-ab96-9672da73da54");
+                GeoFactionDef SynedrionFaction = (GeoFactionDef)gameRootDef.GetDef("0e6dc218-e157-5954-c9ab-1a0606e0d914");
 
                 // 1 + length of compatible ammo list
                 int researchUnlockLength = 1 + ((isWeapon) ? ((WeaponDef)item).CompatibleAmmunition.Length : 0);
@@ -116,6 +119,24 @@ namespace Independent_Reverse_Engineering
                 reverseEngineerDef.Tags = new ResearchTagDef[] { optional };
                 reverseEngineerDef.ValidForFactions = new List<GeoFactionDef> { PhoenixPointFaction };
                 reverseEngineerDef.Unlocks = new ResearchRewardDef[] { mrdDef };
+                reverseEngineerDef.InitialStates = new ResearchDef.InitialResearchState[] {
+                    new ResearchDef.InitialResearchState {
+                        Faction = PhoenixPointFaction,
+                        State = ResearchState.Hidden
+                    },
+                    new ResearchDef.InitialResearchState {
+                        Faction = DisciplesOfAnuFaction,
+                        State = ResearchState.Hidden
+                    },
+                    new ResearchDef.InitialResearchState {
+                        Faction = NewJerichoFaction,
+                        State = ResearchState.Hidden
+                    },
+                    new ResearchDef.InitialResearchState {
+                        Faction = SynedrionFaction,
+                        State = ResearchState.Hidden
+                    }
+                };
                 reverseEngineerDef.RevealRequirements.Container = new ReseachRequirementDefOpContainer[] {
                     new ReseachRequirementDefOpContainer() {
                         Operation = ResearchContainerOperation.ALL,
