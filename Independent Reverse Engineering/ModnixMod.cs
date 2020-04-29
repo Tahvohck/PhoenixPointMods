@@ -100,6 +100,9 @@ namespace Independent_Reverse_Engineering
                 ircDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 ircDef.ItemDef = item;
                 ircDef.Amount = 1;
+                ircDef.LocalizationText = new Base.UI.LocalizedTextBind() {
+                    LocalizationKey = $"REVERSE_ENGINEER_COSTDEF_{item.name}"
+                };
 
                 typeInt = (int)ResearchGUIDSegments.ManufactureResearchReward;
                 ManufactureResearchRewardDef mrdDef = ScriptableObject.CreateInstance<ManufactureResearchRewardDef>();
