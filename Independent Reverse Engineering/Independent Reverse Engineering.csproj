@@ -61,6 +61,7 @@
     <ProjectReference Include="..\ModnixUtils\ModnixUtils.csproj">
       <Project>{6866a0c1-1fd4-44fb-a3b2-b782cb26e3b8}</Project>
       <Name>ModnixUtils</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
