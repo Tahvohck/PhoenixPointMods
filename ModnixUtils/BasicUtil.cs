@@ -99,6 +99,7 @@ namespace ModnixUtils
                 DamageKeywordDef = dkp.DamageKeywordDef
             };
         }
+
         /// <summary>
         /// Return a string representation of a <see cref="ResearchDef"/>.
         /// </summary>
