@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ModnixUtils;
 using Base.Core;
 using Base.Defs;

@@ -1,4 +1,4 @@
-﻿//#define COMPAREMANY
+//#define COMPAREMANY
 //#define NOISY
 using Base.Core;
 using Base.Defs;
