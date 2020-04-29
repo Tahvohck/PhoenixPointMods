@@ -1,0 +1,8 @@
+{
+  "Id": "THV.ModnixUtil",
+  //"ConfigType": "Tahvohck.PP_Weapons_basicstats.ModConfig",
+  "LoadIndex": -1000, // Very High priority
+  "Name": "Modnix Utilities",
+  "Duration": "temp",
+  "lang": "*"
+}

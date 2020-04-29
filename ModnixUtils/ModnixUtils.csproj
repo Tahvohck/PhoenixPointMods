@@ -59,6 +59,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\mod_info.json" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
