@@ -1,4 +1,5 @@
 ﻿using System;
+using PhoenixPoint.Geoscape.Entities.Research;
 using PhoenixPoint.Tactical.Entities.DamageKeywords;
 
 namespace ModnixUtils
@@ -11,6 +12,7 @@ namespace ModnixUtils
             api(ModnixAPIActions.Log.info, input);
         }
     }
+
 
     /// <summary>
     /// Extensions for a variety of PP default classes.
@@ -80,6 +82,31 @@ namespace ModnixUtils
                 Value = dkp.Value,
                 DamageKeywordDef = dkp.DamageKeywordDef
             };
+        }
+
+        public static string Repr(this ResearchDef rDef)
+        {
+            return
+                $"\nrdef:       {rDef.name}" +
+                $"\nFaction:    {rDef.Faction}" +
+                $"\nDLC On:     {rDef.NotEnabledForDLC}" +
+                $"\nDLC:        {rDef.DLC}" +
+                $"\nCutscene:   {rDef.TriggerCutscene}" +
+                $"\nInit:       {rDef.InitialStates}" +
+                $"\nDiplomacy:  {rDef.DiplomacyShift}" +
+                $"\nRSC Reward: {rDef.Resources}" +
+                $"\nUnlocks:    {rDef.Unlocks}" +
+                $"\nInvalid by: {rDef.InvalidatedBy}" +
+                $"\nCosts:      {rDef.Costs}" +
+                $"\nPriority:   {rDef.Priority}" +
+                $"\nViewElDef:  {rDef.ViewElementDef}" +
+                $"\nTags:       {rDef.Tags}" +
+                $"\nValidFor:   {rDef.ValidForFactions}" +
+                $"\nUnlockReq:  {rDef.UnlockRequirements}" +
+                $"\nRevealReq:  {rDef.RevealRequirements}" +
+                $"\nID:         {rDef.Id}" +
+                $"\nResCost:    {rDef.ResearchCost}" +
+                $"";
         }
     }
 }
