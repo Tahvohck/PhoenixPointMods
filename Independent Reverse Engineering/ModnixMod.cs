@@ -1,5 +1,5 @@
 ﻿//#define COMPAREMANY
-#define NOISY
+//#define NOISY
 using Base.Core;
 using Base.Defs;
 using ModnixUtils;
