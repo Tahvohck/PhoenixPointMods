@@ -51,7 +51,7 @@ namespace Independent_Reverse_Engineering
         {
             api("log info", "New MainMod initialized");
             DefRepository gameRootDef = GameUtl.GameComponent<DefRepository>();
-            
+
             List<TacticalItemDef> tacticalItems = gameRootDef.GetAllDefs<TacticalItemDef>().ToList().FindAll(
                 new Predicate<TacticalItemDef>(FilterDefList)
             );
@@ -148,10 +148,10 @@ namespace Independent_Reverse_Engineering
         {
             // Result is true if item is under the 'Independant' resource path and
             // one of the allowed slots exists in its slotbinds.
-            bool result = 
+            bool result =
                 item.ResourcePath.Contains("Independant") &&
                 item.RequiredSlotBinds.ToList().Exists(
-                    slotBind => allowedSlots.Contains( 
+                    slotBind => allowedSlots.Contains(
                         ((ItemSlotDef)slotBind.RequiredSlot).SlotName
                 ));
             return result;
