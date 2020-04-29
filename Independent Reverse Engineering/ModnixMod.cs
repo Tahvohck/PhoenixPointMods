@@ -32,14 +32,14 @@ namespace Independent_Reverse_Engineering
         private static string[] allowedSlots = { "Torso", "Legs", "Head", "GunPoint" };
 
         // PPML v0.1 entry point
-        public static void Init() => new THV_Indie_Revenge().MainMod();
+        public static void Init() => MainMod();
 
         /// <summary>
         /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#SplashMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public void SplashMod(Func<string, object, object> api = null)
+        public static void SplashMod(Func<string, object, object> api = null)
         {
         }
 
@@ -49,7 +49,7 @@ namespace Independent_Reverse_Engineering
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public void MainMod(Func<string, object, object> api = null)
+        public static void MainMod(Func<string, object, object> api = null)
         {
             api("log info", "New MainMod initialized");
             DefRepository gameRootDef = GameUtl.GameComponent<DefRepository>();
