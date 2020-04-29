@@ -21,6 +21,15 @@ namespace ModnixUtils
     }
 
 
+    public class ModnixMod
+    {
+        public void SplashMod(Func<string, object, object> api)
+        {
+            BasicUtil.Log("ModnixUtil Loaded", api);
+        }
+    }
+
+
     /// <summary>
     /// Extensions for a variety of PP default classes.
     /// </summary>
