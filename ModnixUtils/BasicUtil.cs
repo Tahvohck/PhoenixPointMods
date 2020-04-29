@@ -22,6 +22,19 @@ namespace ModnixUtils
     }
 
 
+    /// <summary>
+    /// Configuration class
+    /// </summary>
+    public class ModConfig
+    {
+        public bool newlinesInOutput = false;
+        public string indentString = "    ";
+    }
+
+
+    /// <summary>
+    /// Hook to get Modnix to load this.
+    /// </summary>
     public class ModnixMod
     {
         public void SplashMod(Func<string, object, object> api)
