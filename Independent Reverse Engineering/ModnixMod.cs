@@ -83,28 +83,32 @@ namespace Independent_Reverse_Engineering
                 int typeInt;
 
                 #region Generate reverse engineering def
+                typeInt = (int)ResearchGUIDSegments.ReceiveItemResearchRequirement;
                 ReceiveItemResearchRequirementDef rirrDef = ScriptableObject.CreateInstance<ReceiveItemResearchRequirementDef>();
                 rirrDef.name = item.name + "_ReceiveItemResearchRequirementDef";
-                typeInt = (int)ResearchGUIDSegments.ReceiveItemResearchRequirement;
                 rirrDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 rirrDef.ItemDef = item;
 
+                typeInt = (int)ResearchGUIDSegments.ItemResearchCost;
                 ItemResearchCostDef ircDef = ScriptableObject.CreateInstance<ItemResearchCostDef>();
                 ircDef.name = item.name + "_ItemResearchCostDef";
-                typeInt = (int)ResearchGUIDSegments.ItemResearchCost;
                 ircDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 ircDef.ItemDef = item;
+                ircDef.Amount = 1;
 
+                typeInt = (int)ResearchGUIDSegments.ManufactureResearchReward;
                 ManufactureResearchRewardDef mrdDef = ScriptableObject.CreateInstance<ManufactureResearchRewardDef>();
                 mrdDef.name = item.name + "_ManufactureResearchRewardDef";
-                typeInt = (int)ResearchGUIDSegments.ManufactureResearchReward;
                 mrdDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 mrdDef.Items = researchUnocks;
 
-                ResearchDef reverseEngineerDef = ScriptableObject.CreateInstance<ResearchDef>();
-                reverseEngineerDef.name = item.name + "_ResearchDef";
                 typeInt = (int)ResearchGUIDSegments.Research;
+                string rName = item.name + "_ResearchDef";
+                ResearchDef reverseEngineerDef = ScriptableObject.CreateInstance<ResearchDef>();
+                reverseEngineerDef.name = rName;
                 reverseEngineerDef.Guid = $"{guidBase}-{typeInt:X4}-{guidTail}";
+                reverseEngineerDef.Id = rName;
+                reverseEngineerDef.Faction = PhoenixPointFaction;
                 reverseEngineerDef.Costs = new ResearchCostDef[] { ircDef };
                 reverseEngineerDef.ResearchCost = 100;
                 reverseEngineerDef.Tags = new ResearchTagDef[] { optional };
