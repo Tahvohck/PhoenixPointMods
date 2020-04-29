@@ -63,7 +63,7 @@
     <ProjectReference Include="..\ModnixUtils\ModnixUtils.csproj">
       <Project>{6866a0c1-1fd4-44fb-a3b2-b782cb26e3b8}</Project>
       <Name>ModnixUtils</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +80,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)" "P:\Edward\Documents\my games\Phoenix Point\Mods\PP_Weapons_basicstats\" /Y
-xcopy "$(TargetDir)ModnixUtils.dll" "P:\Edward\Documents\my games\Phoenix Point\Mods\PP_Weapons_basicstats\" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)" "P:\Edward\Documents\my games\Phoenix Point\Mods\PP_Weapons_basicstats\" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
