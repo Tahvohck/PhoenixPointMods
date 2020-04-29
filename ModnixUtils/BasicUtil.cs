@@ -5,6 +5,7 @@ using Base.Defs;
 using PhoenixPoint.Common.Core;
 using PhoenixPoint.Geoscape.Entities.Research;
 using PhoenixPoint.Geoscape.Entities.Research.Cost;
+using PhoenixPoint.Geoscape.Entities.Research.Requirement;
 using PhoenixPoint.Geoscape.Entities.Research.Reward;
 using PhoenixPoint.Geoscape.Levels;
 using PhoenixPoint.Tactical.Entities.DamageKeywords;
@@ -107,19 +108,24 @@ namespace ModnixUtils
         /// <returns></returns>
         public static string Repr(this ResearchDef rDef, string prefix = "")
         {
-            string prefix2 = "";
-            bool level2newline = false;
-            string strNotForDLC = HandleArrayItems(rDef.NotEnabledForDLC, RenderEntitlement, prefix2, level2newline);
-            string strInitialStates =   HandleArrayItems(rDef.InitialStates, RenderInitalState, prefix2, level2newline);
-            string strDiploShift =      HandleArrayItems(rDef.DiplomacyShift, RenderDiplomaticShift, prefix2, level2newline);
-            string strUnlocks =         HandleArrayItems(rDef.Unlocks, RenderUnlock, prefix2, level2newline);
-            string strInvalidatedBy =   HandleArrayItems(rDef.InvalidatedBy, RenderResearch, prefix2, level2newline);
-            string strCosts =           HandleArrayItems(rDef.Costs, RenderCost, prefix2, level2newline);
-            string strTags =            HandleArrayItems(rDef.Tags, RenderTag, prefix2, level2newline);
-            string strValidFor =        HandleArrayItems(rDef.ValidForFactions, RenderFaction, prefix2, level2newline);
+            string prefix2 = "    ";
+            bool level2newline = true;
+            int initial_indent = 0;
+            string strNotForDLC =       HandleArrayItems(rDef.NotEnabledForDLC, RenderEntitlement, prefix2, level2newline, initial_indent);
+            string strInitialStates =   HandleArrayItems(rDef.InitialStates, RenderInitalState, prefix2, level2newline, initial_indent);
+            string strDiploShift =      HandleArrayItems(rDef.DiplomacyShift, RenderDiplomaticShift, prefix2, level2newline, initial_indent);
+            string strUnlocks =         HandleArrayItems(rDef.Unlocks, RenderUnlock, prefix2, level2newline, initial_indent);
+            string strInvalidatedBy =   HandleArrayItems(rDef.InvalidatedBy, RenderResearch, prefix2, level2newline, initial_indent);
+            string strCosts =           HandleArrayItems(rDef.Costs, RenderCost, prefix2, level2newline, initial_indent);
+            string strTags =            HandleArrayItems(rDef.Tags, RenderTag, prefix2, level2newline, initial_indent);
+            string strValidFor =        HandleArrayItems(rDef.ValidForFactions, RenderFaction, prefix2, level2newline, initial_indent);
+            string strUnlockReq =       HandleArrayItems(rDef.UnlockRequirements.Container, RenderResearchDefOpContainer, prefix2, level2newline, initial_indent);
+            string strRevealReq =       HandleArrayItems(rDef.RevealRequirements.Container, RenderResearchDefOpContainer, prefix2, level2newline, initial_indent);
 
             string reprStr = $"===== RESEARCHDEF REPR BEGINS =====" +
-                $"\n{prefix}rdef:       {rDef.name}" +
+                $"\n{prefix}rdef:       {rDef.name} {{{rDef.Guid}}}" +
+                $"\n{prefix}ID:         {rDef.Id}" +
+                $"\n{prefix}ResCost:    {rDef.ResearchCost}" +
                 $"\n{prefix}Faction:    {rDef.Faction}" +
                 $"\n{prefix}DLC Off:    {strNotForDLC}" +
                 $"\n{prefix}DLC:        {rDef.DLC}" +
@@ -134,27 +140,25 @@ namespace ModnixUtils
                 $"\n{prefix}ViewElDef:  {rDef.ViewElementDef}" +
                 $"\n{prefix}Tags:       {strTags}" +
                 $"\n{prefix}ValidFor:   {strValidFor}" +
-                $"\n{prefix}UnlockReq:  {rDef.UnlockRequirements}" +
-                $"\n{prefix}RevealReq:  {rDef.RevealRequirements}" +
-                $"\n{prefix}ID:         {rDef.Id}" +
-                $"\n{prefix}ResCost:    {rDef.ResearchCost}" +
-                $"";
+                $"\n{prefix}UnlockReq:  {strUnlockReq}" +
+                $"\n{prefix}RevealReq:  {strRevealReq}" +
+                $"\n===== RESEARCHDEF REPR ENDS =====";
 
             return reprStr;
         }
 
-        public static string RenderEntitlement(Base.Platforms.EntitlementDef dlcDef)
+        public static string RenderEntitlement(Base.Platforms.EntitlementDef dlcDef, string prefix = "", bool newline = false, int depth = 0)
         {
             if (dlcDef is null) return "null";
             return dlcDef.Name.Localize();
         }
 
-        private static string RenderInitalState(ResearchDef.InitialResearchState state)
+        private static string RenderInitalState(ResearchDef.InitialResearchState state, string prefix = "", bool newline = false, int depth = 0)
         {
             return $"{state.Faction.GetPPName(),-10} - {state.State}";
         }
 
-        private static string RenderDiplomaticShift(DiplomacyRelation relation)
+        private static string RenderDiplomaticShift(DiplomacyRelation relation, string prefix = "", bool newline = false, int depth = 0)
         {
             if (relation is null) return "null";
             return
@@ -163,48 +167,64 @@ namespace ModnixUtils
                 $"{relation.LeaderDiplomacy}";
         }
 
-        private static string RenderUnlock(ResearchRewardDef reward)
+        private static string RenderUnlock(ResearchRewardDef reward, string prefix = "", bool newline = false, int depth = 0)
         {
             if (reward is null) return "";
             return reward.name;
         }
 
-        private static string RenderResearch(ResearchDef research)
+        private static string RenderResearch(ResearchDef research, string prefix = "", bool newline = false, int depth = 0)
         {
             if (research is null) return "null";
             return $"{research.name} {{{research.Guid}}}";
         }
 
-        private static string RenderCost(ResearchCostDef costDef)
+        private static string RenderCost(ResearchCostDef costDef, string prefix = "", bool newline = false, int depth = 0)
         {
             if (costDef is null || costDef.LocalizationText is null) return "null";
             return $"{costDef.LocalizationText.Localize()}: {costDef.Amount}";
         }
 
-        private static string RenderTag(ResearchTagDef tag)
+        private static string RenderTag(ResearchTagDef tag, string prefix = "", bool newline = false, int depth = 0)
         {
             if (tag is null) return "null";
             return tag.name;
         }
 
-        private static string RenderFaction(GeoFactionDef faction)
+        private static string RenderFaction(GeoFactionDef faction, string prefix = "", bool newline = false, int depth = 0)
         {
             if (faction is null) return "null";
             return faction.GetPPName();
         }
 
-        public static string HandleArrayItems<T>(IList<T> arr, Func<T, string> Render, string prefix = "", bool newline = true)
+        private static string RenderResearchDefOpContainer(ReseachRequirementDefOpContainer arg, string prefix = "", bool newline = false, int depth = 0)
+        {
+            return $"{arg.Operation}: {HandleArrayItems(arg.Requirements, RenderResearchDefOp, prefix, newline, depth)}";
+        }
+
+        private static string RenderResearchDefOp(ResearchRequirementDef arg1, string prefix = "", bool newline = false, int depth = 0)
+        {
+            return arg1.name;
+            throw new NotImplementedException();
+        }
+
+        public static string HandleArrayItems<T>(IList<T> arr, Func<T, string, bool, int, string> Render, string prefix = "", bool newline = true, int depth = 0)
         {
             char[] tailend = new[] { ',', ' '};
             string inner = "";
+            depth++;
+            string localPrefix = string.Concat(Enumerable.Repeat(prefix, depth));
+            string outerPrefix = string.Concat(Enumerable.Repeat(prefix, Math.Max(depth - 1, 0)));
+
             if (!(arr is null)) {
+                localPrefix = (arr.Count > 1) ? localPrefix : "";
                 foreach (T item in arr) {
-                    if (newline) inner += "\n";
-                    inner += $"{prefix}{Render(item)}, ";
+                    if (newline && arr.Count > 1) inner += "\n";
+                    inner += $"{localPrefix}{Render(item, localPrefix, newline, depth)}, ";
                 }
                 inner = inner.TrimEnd(tailend);
                 if (arr.Count > 0) inner = $" {inner} ";
-                if (newline) inner += "\n";
+                if (arr.Count > 1 && newline) inner += $"\n{outerPrefix}";
             }
 
             return $"[{inner}]";
