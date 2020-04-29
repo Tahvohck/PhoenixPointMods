@@ -153,8 +153,8 @@ namespace ModnixUtils
                 $"\n{prefix}ViewElDef:  {rDef.ViewElementDef}" +
                 $"\n{prefix}Tags:       {strTags}" +
                 $"\n{prefix}ValidFor:   {strValidFor}" +
-                $"\n{prefix}UnlockReq:  {strUnlockReq}" +
-                $"\n{prefix}RevealReq:  {strRevealReq}" +
+                $"\n{prefix}UnlockReq:  {rDef.UnlockRequirements.Operation}: {strUnlockReq}" +
+                $"\n{prefix}RevealReq:  {rDef.RevealRequirements.Operation}: {strRevealReq}" +
                 $"\n===== RESEARCHDEF REPR ENDS =====";
 
             return reprStr;
