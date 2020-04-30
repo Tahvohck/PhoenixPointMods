@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Independent Reverse Enginee
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_TEMPLATE PP_ModnixMod", "_TEMPLATE PP_ModnixMod\_TEMPLATE PP_ModnixMod.csproj", "{0A1FC1CD-BF7C-4E4D-BE90-D8D3A5DFC374}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_TEMPLATE PP_ModnixMod (VSIX)", "VSIXProject1\_TEMPLATE PP_ModnixMod (VSIX).csproj", "{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{3417E05A-9F97-452B-97D6-E3F573F8315C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A1FC1CD-BF7C-4E4D-BE90-D8D3A5DFC374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A1FC1CD-BF7C-4E4D-BE90-D8D3A5DFC374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
