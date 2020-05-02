@@ -51,6 +51,8 @@ namespace Independent_Reverse_Engineering
             BasicUtil.Log($"Readied {tacticalItems.Count} Independent tactical items.", api);
 
             string guid = "";
+            I2.Loc.LanguageSourceData langDB = I2.Loc.LocalizationManager.Sources[0];
+            int englishKey = langDB.GetLanguageIndex("English");
             foreach (ItemDef item in tacticalItems) {
                 bool isWeapon = item.GetType() == typeof(WeaponDef);
 #if DEBUG
@@ -86,14 +88,17 @@ namespace Independent_Reverse_Engineering
                 rirrDef.ItemDef = item;
 
                 typeInt = (int)ResearchGUIDSegments.ItemResearchCost;
+                string I2Key = $"REVERSE_ENGINEER_COSTDEF_{item.name}";
                 ItemResearchCostDef ircDef = ScriptableObject.CreateInstance<ItemResearchCostDef>();
                 ircDef.name = item.name + "_ItemResearchCostDef";
                 ircDef.Guid = $"{guidBase}-{typeInt:x4}-{guidTail}";
                 ircDef.ItemDef = item;
                 ircDef.Amount = 1;
                 ircDef.LocalizationText = new Base.UI.LocalizedTextBind() {
-                    LocalizationKey = $"REVERSE_ENGINEER_COSTDEF_{item.name}"
+                    LocalizationKey = I2Key
                 };
+                langDB.AddTerm($"REVERSE_ENGINEER_COSTDEF_{item.name}",I2.Loc.eTermType.Text);
+                langDB.GetTermData(I2Key).Languages[englishKey] = "Needed items {0}/{1}";
 
                 typeInt = (int)ResearchGUIDSegments.ManufactureResearchReward;
                 ManufactureResearchRewardDef mrdDef = ScriptableObject.CreateInstance<ManufactureResearchRewardDef>();
