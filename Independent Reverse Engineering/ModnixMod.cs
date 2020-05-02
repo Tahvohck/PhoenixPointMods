@@ -56,10 +56,7 @@ namespace Independent_Reverse_Engineering
             foreach (ItemDef item in tacticalItems) {
                 bool isWeapon = item.GetType() == typeof(WeaponDef);
 #if DEBUG
-                #region Debug output list items in tacticalItems
-                Base.UI.LocalizedTextBind localizeMe = item.GetDisplayName();
-                BasicUtil.Log($"{localizeMe.Localize()} - {item}", api);
-                #endregion
+                BasicUtil.Log($"Making Reverse Engineer for: {item.GetDisplayName().Localize()} - {item}", api);
 #endif
                 ResearchTagDef optional = (ResearchTagDef)gameRootDef.GetDef("08191866-ff38-9e74-abd7-cb484188911a");
                 GeoFactionDef PhoenixPointFaction = (GeoFactionDef)gameRootDef.GetDef("8be7e872-0ad2-a2a4-7bee-c980ed304a8a");
@@ -146,6 +143,7 @@ namespace Independent_Reverse_Engineering
                 };
 #if DEBUG
                 BasicUtil.Log($"{researchUnocks.Length} items prepared for the rDef.", api);
+                BasicUtil.Log(ircDef.LocalizationText.Localize(), api);
 #if NOISY
                 BasicUtil.Log(reverseEngineerDef.Repr(), api);
 #endif
