@@ -26,9 +26,9 @@ namespace Independent_Reverse_Engineering
 
     public class THV_Indie_Revenge
     {
-#pragma warning disable 0169    // Disable ModConfig not used
+#pragma warning disable 0169, IDE0044   // Disable ModConfig not used, make readonly
         private static ModConfig Config;
-#pragma warning restore 0169
+#pragma warning restore 0169, IDE0044
         private static string[] allowedSlots = { "Torso", "Legs", "Head", "GunPoint" };
 
         // PPML v0.1 entry point
