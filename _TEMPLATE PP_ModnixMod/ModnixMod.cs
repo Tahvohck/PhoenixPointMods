@@ -29,12 +29,20 @@ namespace $safeprojectname$
         public static void Init() => MainMod();
 
         /// <summary>
+        /// Fallback function for PPML mods or the (unlikely?) instance that Modnix doesn't supply an API function. Set "api" to this if api is null
+        /// and it will make the mod PPML-safe (see <see cref="SplashMod"/> or <seealso cref="MainMod"/> stubs for example use.
+        /// </summary>
+        /// <returns>Always returns null.</returns>
+        public static object APIFallback(string str, object obj) { return null; }
+
+        /// <summary>
         /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#SplashMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public static void SplashMod(Func<string, object, object> api = null)
         {
+            if (api is null) api = APIFallback;
             // ADVICE: Don't use SplashMod unless you need it!
             // Loading things early in the game will slow down the game's initial load.
             api("log info", "New SplashMod initialized");
@@ -47,6 +55,7 @@ namespace $safeprojectname$
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public static void MainMod(Func<string, object, object> api = null)
         {
+            if (api is null) api = APIFallback;
             // Un-comment this to be able to use the configuration class in your code.
             //Config = api("config", null) as ModConfig ?? new ModConfig();
             api("log info", "New MainMod initialized");
