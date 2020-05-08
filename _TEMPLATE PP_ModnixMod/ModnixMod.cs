@@ -22,11 +22,11 @@ namespace $safeprojectname$
     public class MyMod
     {
 #pragma warning disable IDE0044 // Add readonly modifier (This prevents the IDE from whining about the lack of assignment)
-    private static ModConfig Config;
+        private static ModConfig Config;
 #pragma warning restore IDE0044 // Add readonly modifier
 
-    /// <summary>PPML v0.1 entry point</summary>
-    public static void Init() => MainMod();
+        /// <summary>PPML v0.1 entry point</summary>
+        public static void Init() => MainMod();
 
         /// <summary>
         /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
