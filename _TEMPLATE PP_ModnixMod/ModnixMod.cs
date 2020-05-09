@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace $safeprojectname$
 {
     // Reminder: You will need to add a reference to Assembly-CSharp.dll in order to reference Phoenix Point classes.
+    using ModnixCallback = Func<string, object, object>;  // This is just an easier way to call the Func<>
 
     /// <summary>
     /// Put all configuration options here, Modnix will use this to create json configurations
@@ -40,7 +41,7 @@ namespace $safeprojectname$
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#SplashMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public static void SplashMod(Func<string, object, object> api = null)
+        public static void SplashMod(ModnixCallback api = null)
         {
             if (api is null) api = APIFallback;
             // ADVICE: Don't use SplashMod unless you need it!
@@ -53,7 +54,7 @@ namespace $safeprojectname$
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public static void MainMod(Func<string, object, object> api = null)
+        public static void MainMod(ModnixCallback api = null)
         {
             if (api is null) api = APIFallback;
             // Un-comment this to be able to use the configuration class in your code.
