@@ -9,20 +9,11 @@ using System.Linq;
 
 namespace Tahvohck.PP_Weapons_basicstats
 {
-    public class ModConfig
+    public class ModConfig : ModConfigBase
     {
-        public static readonly DateTime mostRecentVersion = new DateTime(year: 2020, month: 04, day: 21);
         public bool add_shred = true;
         public bool add_pierce = true;
         public bool add_bleed = true;
-        public DateTime configversion = mostRecentVersion;
-
-        internal void Upgrade()
-        {
-            if (configversion < mostRecentVersion) {
-                configversion = mostRecentVersion;
-            }
-        }
     }
 
 
@@ -42,13 +33,10 @@ namespace Tahvohck.PP_Weapons_basicstats
         {
             // Technically, SplashMod isn't the right place to init this mod. However, it ensures a VERY
             // early load, and it doesn't cause any issues. This means PPDefModifier can modify it.
+            BasicUtil.EnsureAPI(ref api);
+            BasicUtil.GetConfig(ref Config, api);
 
-            DefRepository   definitions_repo = GameUtl.GameComponent<DefRepository>();
-            if (api is null) {
-                Config = new ModConfig();
-            } else {
-                Config = (ModConfig)api(ModnixAPIActions.config, new ModConfig());
-            }
+            DefRepository definitions_repo = GameUtl.GameComponent<DefRepository>();
             List<WeaponDef> WeaponList = definitions_repo.GetAllDefs<WeaponDef>().ToList();
             List<DamageKeywordDef> damageKeywords = definitions_repo.GetAllDefs<DamageKeywordDef>().ToList();
 
