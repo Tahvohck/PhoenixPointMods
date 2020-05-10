@@ -20,7 +20,7 @@ namespace Independent_Reverse_Engineering
 {
     using ModnixCallback = Func<string, object, object>;
 
-    public class ModConfig
+    public class ModConfig : ModConfigBase
     {
 
     }
@@ -44,6 +44,9 @@ namespace Independent_Reverse_Engineering
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public static void MainMod(ModnixCallback api = null)
         {
+            BasicUtil.EnsureAPI(ref api);
+            BasicUtil.GetConfig(ref Config, api);
+
             api("log info", "New MainMod initialized");
             DefRepository gameRootDef = GameUtl.GameComponent<DefRepository>();
 
