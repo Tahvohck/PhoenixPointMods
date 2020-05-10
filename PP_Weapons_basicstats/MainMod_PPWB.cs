@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace Tahvohck.PP_Weapons_basicstats
 {
+    using ModnixCallback = Func<string, object, object>;
+
+
     public class ModConfig : ModConfigBase
     {
         public bool add_shred = true;
@@ -29,7 +32,7 @@ namespace Tahvohck.PP_Weapons_basicstats
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#SplashMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public void SplashMod(Func<string, object, object> api = null)
+        public void SplashMod(ModnixCallback api = null)
         {
             // Technically, SplashMod isn't the right place to init this mod. However, it ensures a VERY
             // early load, and it doesn't cause any issues. This means PPDefModifier can modify it.
