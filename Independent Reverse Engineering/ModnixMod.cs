@@ -18,6 +18,8 @@ using UnityEngine;
 
 namespace Independent_Reverse_Engineering
 {
+    using ModnixCallback = Func<string, object, object>;
+
     public class ModConfig
     {
 
@@ -40,7 +42,7 @@ namespace Independent_Reverse_Engineering
         /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
         /// </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
-        public static void MainMod(Func<string, object, object> api = null)
+        public static void MainMod(ModnixCallback api = null)
         {
             api("log info", "New MainMod initialized");
             DefRepository gameRootDef = GameUtl.GameComponent<DefRepository>();
