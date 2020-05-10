@@ -12,6 +12,8 @@ using PhoenixPoint.Tactical.Entities.DamageKeywords;
 
 namespace ModnixUtils
 {
+    using ModnixCallback = Func<string, object, object>;
+
     public class BasicUtil
     {
         public static void Log(object input, Func<string, object, object> api)
