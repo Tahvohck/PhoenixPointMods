@@ -27,6 +27,7 @@ namespace ModnixUtils
         }
     }
 
+
     public class BasicUtil
     {
         public static void Log(object input, Func<string, object, object> api)
@@ -149,7 +150,7 @@ namespace ModnixUtils
         }
 
         /// <summary>
-        /// Clone a damageKeywordPair by Value and damageKeywordDef. This should be enough to prevent any shallow copy issues.
+        /// [Extension method] Clone a damageKeywordPair by Value and damageKeywordDef. This should be enough to prevent any shallow copy issues.
         /// </summary>
         /// <param name="dkp">The damageKeywordPair to clone</param>
         /// <returns>A semi-fresh copy of the dkp</returns>
@@ -162,7 +163,7 @@ namespace ModnixUtils
         }
 
         /// <summary>
-        /// Return a string representation of a <see cref="ResearchDef"/>.
+        /// [Extension method] Return a string representation of a <see cref="ResearchDef"/>.
         /// </summary>
         /// <param name="prefix">Optional prefix to add to each line of the string.</param>
         /// <returns></returns>
