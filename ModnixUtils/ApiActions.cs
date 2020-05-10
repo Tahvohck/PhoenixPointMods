@@ -27,6 +27,7 @@ namespace ModnixUtils
         /// <para>Spec (default, ""): Returns deserialised object of same type</para>
         /// <para>Spec ("save", "write"): Save the provided object to the mod's config file.</para>
         /// </summary>
+        [Obsolete("Use Config.load instead.")]
         public const string config      = "config";
         public const string dir         = "dir";
         public const string logger      = "logger";
@@ -51,6 +52,15 @@ namespace ModnixUtils
             /// Special action that immediately flushes all queued messages to the log
             /// </summary>
             public const string flush       = "log flush";
+        }
+
+        /// <summary>
+        /// set of config actions
+        /// </summary>
+        public struct Config
+        {
+            public const string load = "config";
+            public const string save = "config save";
         }
     }
 }
