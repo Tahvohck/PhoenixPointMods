@@ -135,6 +135,7 @@ namespace ModnixUtils
             string strUnlockReq =       HandleArrayItems(rDef.UnlockRequirements.Container, Render, prefix2, level2newline, initial_indent);
             string strRevealReq =       HandleArrayItems(rDef.RevealRequirements.Container, Render, prefix2, level2newline, initial_indent);
 
+            #region reprStr construction (multiline)
             string reprStr = $"===== RESEARCHDEF REPR BEGINS =====" +
                 $"\n{prefix}rdef:       {rDef.name} {{{rDef.Guid}}}" +
                 $"\n{prefix}ID:         {rDef.Id}" +
@@ -156,6 +157,7 @@ namespace ModnixUtils
                 $"\n{prefix}UnlockReq:  {rDef.UnlockRequirements.Operation}: {strUnlockReq}" +
                 $"\n{prefix}RevealReq:  {rDef.RevealRequirements.Operation}: {strRevealReq}" +
                 $"\n===== RESEARCHDEF REPR ENDS =====";
+            #endregion
 
             return reprStr;
         }
