@@ -14,6 +14,19 @@ namespace ModnixUtils
 {
     using ModnixCallback = Func<string, object, object>;
 
+    public class ModConfigBase
+    {
+        public static readonly DateTime mostRecentVersion = new DateTime(year: 2020, month: 04, day: 21);
+        public DateTime configversion = mostRecentVersion;
+
+        public void Upgrade()
+        {
+            if (configversion < mostRecentVersion) {
+                configversion = mostRecentVersion;
+            }
+        }
+    }
+
     public class BasicUtil
     {
         public static void Log(object input, Func<string, object, object> api)
@@ -27,7 +40,7 @@ namespace ModnixUtils
     /// <summary>
     /// Configuration class
     /// </summary>
-    public class ModConfig
+    public class ModConfig : ModConfigBase
     {
         public bool newlinesInOutput = false;
         public string indentString = "    ";
