@@ -14,7 +14,7 @@ namespace ModnixUtils
 {
     using ModnixCallback = Func<string, object, object>;
 
-    public class ModConfigBase
+    public abstract class ModConfigBase
     {
         public static readonly DateTime mostRecentVersion = new DateTime(year: 2020, month: 04, day: 21);
         public DateTime configversion = mostRecentVersion;
