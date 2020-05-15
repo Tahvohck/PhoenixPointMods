@@ -46,9 +46,11 @@ namespace $safeprojectname$
         /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
         public static void SplashMod(ModnixCallback api = null)
         {
-            if (api is null) api = APIFallback;
             // ADVICE: Don't use SplashMod unless you need it!
             // Loading things early in the game will slow down the game's initial load.
+            // Whatever the case, don't have both a SplashMod and a MainMod! It's a bad idea!
+            if (api is null) api = APIFallback;
+            if (storedAPI is null) storedAPI = api;
             api("log info", "New SplashMod initialized");
         }
 
@@ -60,6 +62,7 @@ namespace $safeprojectname$
         public static void MainMod(ModnixCallback api = null)
         {
             if (api is null) api = APIFallback;
+            if (storedAPI is null) storedAPI = api;
             // Un-comment this to be able to use the configuration class in your code.
             //Config = api("config", null) as ModConfig ?? new ModConfig();
             api("log info", "New MainMod initialized");
