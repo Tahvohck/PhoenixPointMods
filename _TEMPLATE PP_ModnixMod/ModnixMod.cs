@@ -20,7 +20,7 @@ namespace $safeprojectname$
     }
 
 
-    public class MyMod
+    public class MyModnixMod
     {
 #pragma warning disable IDE0044 // Add readonly modifier (This prevents the IDE from whining about the lack of assignment)
         private static ModConfig Config;
