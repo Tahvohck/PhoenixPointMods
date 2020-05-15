@@ -60,7 +60,6 @@ namespace BetterItemInfo
         public static void MainMod(ModnixCallback api = null)
         {
             BasicUtil.EnsureAPI(ref api);
-            FileLog.logPath = "./Mods/BII_Harmony.log";
             if (storedAPI is null) storedAPI = api;
             harmonyInst = HarmonyInstance.Create(typeof(MyModnixMod).FullName);
             harmonyInst.PatchAll();
@@ -88,44 +87,22 @@ namespace BetterItemInfo
                 WeaponDef weapon = item as WeaponDef;
                 bool is_melee = weapon.Tags.Contains(__instance.MeleeWeaponTag);
                 bool is_explode = !float.IsInfinity(weapon.AreaRadius);
-                FileLog.Log($"Displaying Item {item.GetDisplayName().Localize()}");
 
                 if (!(weapon.DamagePayload is null)) {
-                    FileLog.Log("It's a Weapon");
                     int AmmoPerAction = weapon.DamagePayload.AutoFireShotCount * weapon.DamagePayload.ProjectilesPerShot;
 
                     // Display Attack Type
-                    try {
-                        if (is_melee) {
-                            FileLog.Log("Melee");
-                            SetStat(__instance.MeleeBurstStatName, string.Empty, 1);
-                        } else if (AmmoPerAction > 1) {
-                            FileLog.Log("Burst fire");
-                            SetStat(__instance.RoundBurstStatName, AmmoPerAction);
-                        } else {
-                            FileLog.Log("Single fire");
-                            SetStat(__instance.SingleBurstStatName, string.Empty, 1);
-                        }
-                    } catch (Exception e) {
-                        FileLog.Log($"---------------------------------------\n" +
-                            e.Message + "\n" +
-                            e.StackTrace +
-                            $"\n---------------------------------------");
+                    if (is_melee) {
+                        SetStat(__instance.MeleeBurstStatName, string.Empty, 1);
+                    } else if (AmmoPerAction > 1) {
+                        SetStat(__instance.RoundBurstStatName, AmmoPerAction);
+                    } else {
+                        SetStat(__instance.SingleBurstStatName, string.Empty, 1);
                     }
 
-                    try 
-                    {
-                        FileLog.Log($"Damage types to parse: {weapon.DamagePayload.DamageKeywords.Count}");
-                        foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
-                            FileLog.Log($"Add damage: {dkp.DamageKeywordDef.Visuals.DisplayName1.Localize()} - {dkp.Value}");
-                            if (dkp.Value == 0) continue;   // Skip damage values of zero
-                            SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
-                        }
-                    } catch (Exception e) {
-                        FileLog.Log($"---------------------------------------\n" +
-                            e.Message + "\n" +
-                            e.StackTrace +
-                            $"\n---------------------------------------");
+                    foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
+                        if (dkp.Value == 0) continue;   // Skip damage values of zero
+                        SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
                     }
                 }
 
@@ -135,7 +112,9 @@ namespace BetterItemInfo
                 //    Sprite sprite = visuals.SmallIcon;
                 //}
             } else {
-                FileLog.Log("Defaulting for standard item.");
+#if DEBUG
+                BasicUtil.Log("Defaulting for standard item.", MyModnixMod.storedAPI);
+#endif
                 // TODO Implement Other Code
                 return true; // run the default code until implmented
             }
