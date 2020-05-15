@@ -21,7 +21,6 @@ namespace BetterItemInfo
     // This is just an easier way to call the Func<string, object, object> that Modnix passes for
     // API calls.
     using ModnixCallback = Func<string, object, object>;
-    using PriorityDict = Dictionary<string, int>;
 
 
     /// <summary>
@@ -37,9 +36,7 @@ namespace BetterItemInfo
 
     public class MyModnixMod
     {
-#pragma warning disable IDE0044 // Add readonly modifier (This prevents the IDE from whining about the lack of assignment)
         internal static ModConfig Config;
-#pragma warning restore IDE0044 // Add readonly modifier
         internal static HarmonyInstance harmonyInst;
         #region Modnix Support
         internal static ModnixCallback storedAPI;   // Use this if you need the API in helper methods or other classes.
