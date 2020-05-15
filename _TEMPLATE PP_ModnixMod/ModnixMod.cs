@@ -25,6 +25,8 @@ namespace $safeprojectname$
 #pragma warning disable IDE0044 // Add readonly modifier (This prevents the IDE from whining about the lack of assignment)
         internal static ModConfig Config;
 #pragma warning restore IDE0044 // Add readonly modifier
+        #region Modnix Support
+        internal static ModnixCallback storedAPI;   // Use this if you need the API in helper methods or other classes.
 
         /// <summary>
         /// Fallback function for PPML mods or the (unlikely?) instance that Modnix doesn't supply an API function. Set "api" to this if api is null
@@ -32,6 +34,7 @@ namespace $safeprojectname$
         /// </summary>
         /// <returns>Always returns null.</returns>
         internal static object APIFallback(string str, object obj) { return null; }
+        #endregion
 
         /// <summary>PPML v0.1 entry point</summary>
         public static void Init() => MainMod();
