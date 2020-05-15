@@ -26,15 +26,15 @@ namespace $safeprojectname$
         internal static ModConfig Config;
 #pragma warning restore IDE0044 // Add readonly modifier
 
-        /// <summary>PPML v0.1 entry point</summary>
-        public static void Init() => MainMod();
-
         /// <summary>
         /// Fallback function for PPML mods or the (unlikely?) instance that Modnix doesn't supply an API function. Set "api" to this if api is null
         /// and it will make the mod PPML-safe (see <see cref="SplashMod"/> or <seealso cref="MainMod"/> stubs for example use.
         /// </summary>
         /// <returns>Always returns null.</returns>
-        public static object APIFallback(string str, object obj) { return null; }
+        internal static object APIFallback(string str, object obj) { return null; }
+
+        /// <summary>PPML v0.1 entry point</summary>
+        public static void Init() => MainMod();
 
         /// <summary>
         /// Called very early, just after main assemblies are loaded, before logos. Saves have not been scanned and most game data are unavailable.
