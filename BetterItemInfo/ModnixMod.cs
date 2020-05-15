@@ -75,6 +75,7 @@ namespace BetterItemInfo
     public class HPatch_UIIT_SetStat
     {
         // Find once, use many
+        // I really don't like it, but I have to Reflect to get this fucker
         static MethodInfo protectedMethod = typeof(UIItemTooltip).GetMethod("SetStat", BindingFlags.Instance | BindingFlags.NonPublic);
 
         public static bool Prefix(ItemDef item, bool secondObject, UIItemTooltip __instance)
@@ -143,7 +144,6 @@ namespace BetterItemInfo
 
 
             // helper to make calling __instance.SetStat easier
-            // I really don't like it, but I have to Reflect to get this fucker
             void SetStat(LocalizedTextBind localizedText, object statValue, object statCompareValue = null, Sprite statIcon = null)
             {
                 // apply those STDs
