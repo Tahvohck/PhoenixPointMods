@@ -91,7 +91,8 @@ namespace BetterItemInfo
                 bool is_explode = !float.IsInfinity(weapon.AreaRadius);
 
                 if (!(weapon.DamagePayload is null)) {
-                    int AmmoPerAction = weapon.DamagePayload.AutoFireShotCount *
+                    int AmmoPerAction =
+                        weapon.DamagePayload.AutoFireShotCount *
                         weapon.DamagePayload.ProjectilesPerShot;
 
                     // Display Attack Type
