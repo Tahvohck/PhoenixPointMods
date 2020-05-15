@@ -23,7 +23,7 @@ namespace $safeprojectname$
     public class MyModnixMod
     {
 #pragma warning disable IDE0044 // Add readonly modifier (This prevents the IDE from whining about the lack of assignment)
-        private static ModConfig Config;
+        internal static ModConfig Config;
 #pragma warning restore IDE0044 // Add readonly modifier
 
         /// <summary>PPML v0.1 entry point</summary>
