@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Base.UI;
 using Harmony;
 using ModnixUtils;
 using PhoenixPoint.Common.Entities.Items;
-using PhoenixPoint.Common.UI;
 using PhoenixPoint.Common.View.ViewControllers.Inventory;
 using PhoenixPoint.Tactical.Entities.DamageKeywords;
 using PhoenixPoint.Tactical.Entities.Weapons;
+using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace BetterItemInfo
