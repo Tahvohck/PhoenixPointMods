@@ -16,8 +16,11 @@ using UnityEngine;
 
 namespace BetterItemInfo
 {
-    // Reminder: You will need to add a reference to Assembly-CSharp.dll in order to reference Phoenix Point classes.
-    using ModnixCallback = Func<string, object, object>;  // This is just an easier way to call the Func<string, object, object>
+    // Reminder: You will need to add a reference to Assembly-CSharp.dll in order to reference Phoenix Point
+    // classes.
+    // This is just an easier way to call the Func<string, object, object> that Modnix passes for
+    // API calls.
+    using ModnixCallback = Func<string, object, object>;
     using PriorityDict = Dictionary<string, int>;
 
 
@@ -53,10 +56,11 @@ namespace BetterItemInfo
         public static void Init() => MainMod();
 
         /// <summary>
-        /// Called after basic assets are loaded, before the hottest year cinematic. Virtually the same time as PPML.
-        /// Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
+        /// Called after basic assets are loaded, before the hottest year cinematic. Virtually the same time
+        /// as PPML. Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
         /// </summary>
-        /// <param name="api">First param (string) is the query/action. Second param (object) and result (object) varies by action.</param>
+        /// <param name="api">First param (string) is the query/action. Second param (object) and result
+        /// (object) varies by action.</param>
         public static void MainMod(ModnixCallback api = null)
         {
             BasicUtil.EnsureAPI(ref api);
@@ -75,7 +79,8 @@ namespace BetterItemInfo
     {
         // Find once, use many
         // I really don't like it, but I have to Reflect to get this fucker
-        static MethodInfo protectedMethod = typeof(UIItemTooltip).GetMethod("SetStat", BindingFlags.Instance | BindingFlags.NonPublic);
+        static MethodInfo protectedMethod = typeof(UIItemTooltip)
+            .GetMethod("SetStat", BindingFlags.Instance | BindingFlags.NonPublic);
 
         public static bool Prefix(ItemDef item, bool secondObject, UIItemTooltip __instance)
         {
@@ -89,7 +94,8 @@ namespace BetterItemInfo
                 bool is_explode = !float.IsInfinity(weapon.AreaRadius);
 
                 if (!(weapon.DamagePayload is null)) {
-                    int AmmoPerAction = weapon.DamagePayload.AutoFireShotCount * weapon.DamagePayload.ProjectilesPerShot;
+                    int AmmoPerAction = weapon.DamagePayload.AutoFireShotCount *
+                        weapon.DamagePayload.ProjectilesPerShot;
 
                     // Display Attack Type
                     if (is_melee) {
@@ -123,10 +129,12 @@ namespace BetterItemInfo
 
 
             // helper to make calling __instance.SetStat easier
-            void SetStat(LocalizedTextBind localizedText, object statValue, object statCompareValue = null, Sprite statIcon = null)
+            void SetStat(LocalizedTextBind localizedText, object statValue, object statCompareValue = null,
+                Sprite statIcon = null)
             {
                 // apply those STDs
-                protectedMethod.Invoke(__instance, new object[] { localizedText, secondObject, statValue, statCompareValue, statIcon });
+                protectedMethod.Invoke(__instance,
+                    new object[] { localizedText, secondObject, statValue, statCompareValue, statIcon });
             }
 
         }
