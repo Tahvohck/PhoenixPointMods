@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace $safeprojectname$
 {
     // Reminder: You will need to add a reference to Assembly-CSharp.dll in order to reference Phoenix Point classes.
-    using ModnixCallback = Func<string, object, object>;  // This is just an easier way to call the Func<>
+    using ModnixCallback = Func<string, object, object>;  // This is just an easier way to call the Func<string, object, object>
 
     /// <summary>
     /// Put all configuration options here, Modnix will use this to create json configurations
