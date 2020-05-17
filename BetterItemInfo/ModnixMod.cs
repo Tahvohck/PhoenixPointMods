@@ -103,6 +103,7 @@ namespace BetterItemInfo
                     }
                     // TODO: Display scatter shots different.
 
+                    // Iterate over damages
                     foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
                         // Skip damage values of zero
                         if (MyModnixMod.Config.hideZeroes && dkp.Value == 0) continue;
@@ -130,9 +131,9 @@ namespace BetterItemInfo
 
             // TODO: Ammo charges (do anything but weapons use this?)
             // TODO: Hands to use
+            // Weight
             SetStat(__instance.WeightStatName, weight, -weight);
             return false;
-
 
             // helper to make calling __instance.SetStat easier
             void SetStat(LocalizedTextBind localizedText, object statValue, object statCompareValue = null,
