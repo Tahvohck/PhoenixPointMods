@@ -53,7 +53,8 @@ namespace ModnixUtils
         public static bool GetConfig<GenericConfig>(ref GenericConfig config, ModnixCallback api)
         where GenericConfig : class, new()
         {
-            EnsureAPI(ref api);     // api is not passed by ref to GetConfig, so this only ensures it's locally non-null
+            // api is not passed by ref to GetConfig, so this only ensures it's locally non-null
+            EnsureAPI(ref api);
             config = api(ModnixAPIActions.Config.load, new GenericConfig()) as GenericConfig;
             if (config is null) {
                 config = new GenericConfig();
@@ -144,8 +145,8 @@ namespace ModnixUtils
         }
 
         /// <summary>
-        /// Clone a damageKeywordPair by Value and damageKeywordDef. This should be enough to prevent any shallow copy issues.
-        /// </summary>
+        /// Clone a damageKeywordPair by Value and damageKeywordDef. This should be enough to prevent any
+        /// shallow copy issues. </summary>
         /// <param name="dkp">The damageKeywordPair to clone</param>
         /// <returns>A semi-fresh copy of the dkp</returns>
         public static DamageKeywordPair Clone(this DamageKeywordPair dkp)
@@ -204,18 +205,22 @@ namespace ModnixUtils
             return reprStr;
         }
 
-        public static string Render(this Base.Platforms.EntitlementDef dlcDef, string prefix = "", bool newline = false, int depth = 0)
+        #region Render extensions
+        public static string Render(this Base.Platforms.EntitlementDef dlcDef,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (dlcDef is null) return "null";
             return dlcDef.Name.Localize();
         }
 
-        public static string Render(this ResearchDef.InitialResearchState state, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchDef.InitialResearchState state,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             return $"{state.Faction.GetPPName(),-10} - {state.State}";
         }
 
-        public static string Render(this DiplomacyRelation relation, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this DiplomacyRelation relation,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (relation is null) return "null";
             return
@@ -224,47 +229,56 @@ namespace ModnixUtils
                 $"{relation.LeaderDiplomacy}";
         }
 
-        public static string Render(this ResearchRewardDef reward, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchRewardDef reward,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (reward is null) return "";
             return reward.name;
         }
 
-        public static string Render(this ResearchDef research, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchDef research,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (research is null) return "null";
             return $"{research.name} {{{research.Guid}}}";
         }
 
-        public static string Render(this ResearchCostDef costDef, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchCostDef costDef,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (costDef is null || costDef.LocalizationText is null) return "null";
             return $"{costDef.LocalizationText.Localize()}: {costDef.Amount}";
         }
 
-        public static string Render(this ResearchTagDef tag, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchTagDef tag,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (tag is null) return "null";
             return tag.name;
         }
 
-        public static string Render(this GeoFactionDef faction, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this GeoFactionDef faction,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (faction is null) return "null";
             return faction.GetPPName();
         }
 
-        public static string Render(this ReseachRequirementDefOpContainer arg, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ReseachRequirementDefOpContainer arg,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             return $"{arg.Operation}: {HandleArrayItems(arg.Requirements, Render, prefix, newline, depth)}";
         }
 
-        public static string Render(this ResearchRequirementDef arg1, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchRequirementDef arg1,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             return arg1.name;
         }
+        #endregion
 
-        public static string HandleArrayItems<T>(IList<T> arr, Func<T, string, bool, int, string> Render, string prefix = "", bool newline = true, int depth = 0)
+        public static string HandleArrayItems<T>(IList<T> arr, Func<T, string, bool, int, string> Render,
+            string prefix = "", bool newline = true, int depth = 0)
         {
             char[] tailend = new[] { ',', ' '};
             string inner = "";
