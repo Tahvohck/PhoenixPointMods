@@ -13,8 +13,7 @@ namespace BetterItemInfo
 {
     // Reminder: You will need to add a reference to Assembly-CSharp.dll in order to reference Phoenix Point
     // classes.
-    // This is just an easier way to call the Func<string, object, object> that Modnix passes for
-    // API calls.
+    // This is just an easier way to call the Func<string, object, object> that Modnix passes for API calls.
     using ModnixCallback = Func<string, object, object>;
 
 
@@ -25,9 +24,6 @@ namespace BetterItemInfo
     /// </summary>
     public class ModConfig
     {
-        /// <summary>
-        /// Hide zeroes from item displays.
-        /// </summary>
         public bool hideZeroes = true;
     }
 
@@ -52,8 +48,7 @@ namespace BetterItemInfo
 
         /// <summary>
         /// Called after basic assets are loaded, before the hottest year cinematic. Virtually the same time
-        /// as PPML. Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod
-        /// </summary>
+        /// as PPML. Full info at https://github.com/Sheep-y/Modnix/wiki/DLL-Specs#MainMod </summary>
         /// <param name="api">First param (string) is the query/action. Second param (object) and result
         /// (object) varies by action.</param>
         public static void MainMod(ModnixCallback api = null)
@@ -67,15 +62,14 @@ namespace BetterItemInfo
         }
     }
 
-    
+
     [HarmonyPatch(typeof(UIItemTooltip))]
     [HarmonyPatch("SetStats")]
     public class HPatch_UIIT_SetStat
     {
-        // Find once, use many
-        // I really don't like it, but I have to Reflect to get this fucker
-        static MethodInfo protectedMethod = typeof(UIItemTooltip)
-            .GetMethod("SetStat", BindingFlags.Instance | BindingFlags.NonPublic);
+        // Find once, use many. I really don't like it, but I have to Reflect to get this fucker
+        static MethodInfo protectedMethod =
+            typeof(UIItemTooltip).GetMethod("SetStat", BindingFlags.Instance | BindingFlags.NonPublic);
 
         public static bool Prefix(ItemDef item, bool secondObject, UIItemTooltip __instance)
         {
@@ -90,8 +84,7 @@ namespace BetterItemInfo
 
                 if (!(weapon.DamagePayload is null)) {
                     int AmmoPerAction =
-                        weapon.DamagePayload.AutoFireShotCount *
-                        weapon.DamagePayload.ProjectilesPerShot;
+                        weapon.DamagePayload.AutoFireShotCount * weapon.DamagePayload.ProjectilesPerShot;
 
                     // Display Attack Type
                     if (is_melee) {
@@ -105,13 +98,12 @@ namespace BetterItemInfo
 
                     // Iterate over damages
                     foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
-                        // Skip damage values of zero
+                        // Skip damage values of zero if configured to do so
                         if (MyModnixMod.Config.hideZeroes && dkp.Value == 0) continue;
                         SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
                     }
                 } else {
-                    BasicUtil.Log(
-                        $"{weapon.GetDisplayName().Localize()}: DamagePayload is null",
+                    BasicUtil.Log($"{weapon.GetDisplayName().Localize()}: DamagePayload is null",
                         MyModnixMod.storedAPI);
                 }
 
@@ -119,7 +111,7 @@ namespace BetterItemInfo
                 // TODO: Blast Radius
                 // TODO: AP Cost
 
-                // TODO: Determin if this sprite call even matters
+                // TODO: Determine if this sprite call even matters
                 //ViewElementDef visuals = weapon.DamagePayload.GetTopPriorityDamageType().Visuals;
                 //if (!(visuals is null)) {
                 //    Sprite sprite = visuals.SmallIcon;
@@ -128,15 +120,14 @@ namespace BetterItemInfo
 #if DEBUG
                 BasicUtil.Log("Defaulting for standard item.", MyModnixMod.storedAPI);
 #endif
-                // TODO Implement Other Code
-                return true; // run the default code until implmented
+                // TODO Implement other items code, until then run the default code until implmented
+                return true;
                 // TODO: Armor stats (BodyPartAspect)
             }
 
             // TODO: Ammo charges (do anything but weapons use this?)
             // TODO: Hands to use
-            // Weight
-            SetStat(__instance.WeightStatName, weight, -weight);
+            SetStat(__instance.WeightStatName, weight, -weight);    // Weight
             return false;
 
             // helper to make calling __instance.SetStat easier
