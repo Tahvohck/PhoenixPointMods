@@ -101,7 +101,7 @@ namespace BetterItemInfo
                     } else {
                         SetStat(__instance.SingleBurstStatName, string.Empty, 1);
                     }
-                    // TODO: Display scatter shots different.
+                    // TODO: Display scatter shot amount separate from burst.
 
                     // Iterate over damages
                     foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
@@ -110,7 +110,9 @@ namespace BetterItemInfo
                         SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
                     }
                 } else {
-                    BasicUtil.Log($"{weapon.GetDisplayName().Localize()}: DamagePayload is null", MyModnixMod.storedAPI);
+                    BasicUtil.Log(
+                        $"{weapon.GetDisplayName().Localize()}: DamagePayload is null",
+                        MyModnixMod.storedAPI);
                 }
 
                 // TODO: Range
