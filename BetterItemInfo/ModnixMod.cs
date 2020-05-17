@@ -101,6 +101,7 @@ namespace BetterItemInfo
                     } else {
                         SetStat(__instance.SingleBurstStatName, string.Empty, 1);
                     }
+                    // TODO: Display scatter shots different.
 
                     foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
                         // Skip damage values of zero
@@ -108,6 +109,10 @@ namespace BetterItemInfo
                         SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
                     }
                 }
+
+                // TODO: Range
+                // TODO: Blast Radius
+                // TODO: AP Cost
 
                 // TODO: Determin if this sprite call even matters
                 //ViewElementDef visuals = weapon.DamagePayload.GetTopPriorityDamageType().Visuals;
@@ -120,7 +125,11 @@ namespace BetterItemInfo
 #endif
                 // TODO Implement Other Code
                 return true; // run the default code until implmented
+                // TODO: Armor stats (BodyPartAspect)
             }
+
+            // TODO: Ammo charges (do anything but weapons use this?)
+            // TODO: Hands to use
             SetStat(__instance.WeightStatName, weight, -weight);
             return false;
 
