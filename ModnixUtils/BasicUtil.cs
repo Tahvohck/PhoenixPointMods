@@ -46,23 +46,18 @@ namespace ModnixUtils
         }
 
         /// <summary>
-        /// Get the config from Modnix or a new, default config. Optionally upgrade (on by default).
+        /// Get the config from Modnix or a new, default config.
         /// </summary>
         /// <typeparam name="GenericConfig">Derived config type</typeparam>
-        /// <param name="doUpgrade">Set to false to skip the upgrade and save the config while loading.</param>
         /// <returns>True if the config was able to be loaded from Modnix.</returns>
-        public static bool GetConfig<GenericConfig>(ref GenericConfig config, ModnixCallback api, bool doUpgrade = true)
-        where GenericConfig : ModConfigBase, new()
+        public static bool GetConfig<GenericConfig>(ref GenericConfig config, ModnixCallback api)
+        where GenericConfig : class, new()
         {
             EnsureAPI(ref api);     // api is not passed by ref to GetConfig, so this only ensures it's locally non-null
-            config = api(ModnixAPIActions.config, new GenericConfig()) as GenericConfig;
+            config = api(ModnixAPIActions.Config.load, new GenericConfig()) as GenericConfig;
             if (config is null) {
                 config = new GenericConfig();
                 return false;
-            }
-            if (doUpgrade) {
-                config.Upgrade();
-                api(ModnixAPIActions.Config.save, config);
             }
             return true;
         }
