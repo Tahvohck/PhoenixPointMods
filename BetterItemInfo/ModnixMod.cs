@@ -25,7 +25,10 @@ namespace BetterItemInfo
     /// </summary>
     public class ModConfig
     {
-
+        /// <summary>
+        /// Hide zeroes from item displays.
+        /// </summary>
+        public bool hideZeroes = true;
     }
 
 
@@ -100,7 +103,8 @@ namespace BetterItemInfo
                     }
 
                     foreach (DamageKeywordPair dkp in weapon.DamagePayload.DamageKeywords) {
-                        if (dkp.Value == 0) continue;   // Skip damage values of zero
+                        // Skip damage values of zero
+                        if (MyModnixMod.Config.hideZeroes && dkp.Value == 0) continue;
                         SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
                     }
                 }
