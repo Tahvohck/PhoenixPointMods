@@ -109,6 +109,8 @@ namespace BetterItemInfo
                         if (MyModnixMod.Config.hideZeroes && dkp.Value == 0) continue;
                         SetStat(dkp.DamageKeywordDef.Visuals.DisplayName1, dkp.Value, dkp.Value);
                     }
+                } else {
+                    BasicUtil.Log($"{weapon.GetDisplayName().Localize()}: DamagePayload is null", MyModnixMod.storedAPI);
                 }
 
                 // TODO: Range
