@@ -14,7 +14,7 @@ namespace ModnixUtils
 {
     using ModnixCallback = Func<string, object, object>;
 
-    public class ModConfigBase
+    public abstract class ModConfigBase
     {
         public static readonly DateTime mostRecentVersion = new DateTime(year: 2020, month: 04, day: 21);
         public DateTime configversion = mostRecentVersion;
@@ -47,23 +47,19 @@ namespace ModnixUtils
         }
 
         /// <summary>
-        /// Get the config from Modnix or a new, default config. Optionally upgrade (on by default).
+        /// Get the config from Modnix or a new, default config.
         /// </summary>
         /// <typeparam name="GenericConfig">Derived config type</typeparam>
-        /// <param name="doUpgrade">Set to false to skip the upgrade and save the config while loading.</param>
         /// <returns>True if the config was able to be loaded from Modnix.</returns>
-        public static bool GetConfig<GenericConfig>(ref GenericConfig config, ModnixCallback api, bool doUpgrade = true)
-        where GenericConfig : ModConfigBase, new()
+        public static bool GetConfig<GenericConfig>(ref GenericConfig config, ModnixCallback api)
+        where GenericConfig : class, new()
         {
-            EnsureAPI(ref api);     // api is not passed by ref to GetConfig, so this only ensures it's locally non-null
-            config = api(ModnixAPIActions.config, new GenericConfig()) as GenericConfig;
+            // api is not passed by ref to GetConfig, so this only ensures it's locally non-null
+            EnsureAPI(ref api);
+            config = api(ModnixAPIActions.Config.load, new GenericConfig()) as GenericConfig;
             if (config is null) {
                 config = new GenericConfig();
                 return false;
-            }
-            if (doUpgrade) {
-                config.Upgrade();
-                api(ModnixAPIActions.Config.save, config);
             }
             return true;
         }
@@ -150,8 +146,8 @@ namespace ModnixUtils
         }
 
         /// <summary>
-        /// [Extension method] Clone a damageKeywordPair by Value and damageKeywordDef. This should be enough to prevent any shallow copy issues.
-        /// </summary>
+        /// [Extension method] Clone a damageKeywordPair by Value and damageKeywordDef. This should be enough
+        /// to prevent any shallow copy issues. </summary>
         /// <param name="dkp">The damageKeywordPair to clone</param>
         /// <returns>A semi-fresh copy of the dkp</returns>
         public static DamageKeywordPair Clone(this DamageKeywordPair dkp)
@@ -210,18 +206,22 @@ namespace ModnixUtils
             return reprStr;
         }
 
-        public static string Render(this Base.Platforms.EntitlementDef dlcDef, string prefix = "", bool newline = false, int depth = 0)
+        #region Render extensions
+        public static string Render(this Base.Platforms.EntitlementDef dlcDef,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (dlcDef is null) return "null";
             return dlcDef.Name.Localize();
         }
 
-        public static string Render(this ResearchDef.InitialResearchState state, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchDef.InitialResearchState state,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             return $"{state.Faction.GetPPName(),-10} - {state.State}";
         }
 
-        public static string Render(this DiplomacyRelation relation, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this DiplomacyRelation relation,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (relation is null) return "null";
             return
@@ -230,47 +230,56 @@ namespace ModnixUtils
                 $"{relation.LeaderDiplomacy}";
         }
 
-        public static string Render(this ResearchRewardDef reward, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchRewardDef reward,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (reward is null) return "";
             return reward.name;
         }
 
-        public static string Render(this ResearchDef research, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchDef research,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (research is null) return "null";
             return $"{research.name} {{{research.Guid}}}";
         }
 
-        public static string Render(this ResearchCostDef costDef, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchCostDef costDef,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (costDef is null || costDef.LocalizationText is null) return "null";
             return $"{costDef.LocalizationText.Localize()}: {costDef.Amount}";
         }
 
-        public static string Render(this ResearchTagDef tag, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchTagDef tag,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (tag is null) return "null";
             return tag.name;
         }
 
-        public static string Render(this GeoFactionDef faction, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this GeoFactionDef faction,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             if (faction is null) return "null";
             return faction.GetPPName();
         }
 
-        public static string Render(this ReseachRequirementDefOpContainer arg, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ReseachRequirementDefOpContainer arg,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             return $"{arg.Operation}: {HandleArrayItems(arg.Requirements, Render, prefix, newline, depth)}";
         }
 
-        public static string Render(this ResearchRequirementDef arg1, string prefix = "", bool newline = false, int depth = 0)
+        public static string Render(this ResearchRequirementDef arg1,
+            string prefix = "", bool newline = false, int depth = 0)
         {
             return arg1.name;
         }
+        #endregion
 
-        public static string HandleArrayItems<T>(IList<T> arr, Func<T, string, bool, int, string> Render, string prefix = "", bool newline = true, int depth = 0)
+        public static string HandleArrayItems<T>(IList<T> arr, Func<T, string, bool, int, string> Render,
+            string prefix = "", bool newline = true, int depth = 0)
         {
             char[] tailend = new[] { ',', ' '};
             string inner = "";
