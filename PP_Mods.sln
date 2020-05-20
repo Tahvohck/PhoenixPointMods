@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PP_Weapons_basicstats", "PP_Weapons_basicstats\PP_Weapons_basicstats.csproj", "{9926E89F-6652-4511-AFD9-8A6B40ACB88E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8} = {6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModnixUtils", "ModnixUtils\ModnixUtils.csproj", "{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}"
 EndProject
