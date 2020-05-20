@@ -73,6 +73,8 @@
   <PropertyGroup>
     <PostBuildEvent>:: Redirect stderr to null to hide dir already exists error.
 md "$(SolutionDir)_Resources" 2&gt; nul
-cp "$(TargetPath)" "$(SolutionDir)_Resources\$(TargetName)-$(ConfigurationName)$(TargetExt)"</PostBuildEvent>
+
+cp "$(TargetPath)" "$(SolutionDir)_Resources\$(TargetName)-$(ConfigurationName)$(TargetExt)"
+cp "$(TargetPath)" "$(SolutionDir)_Resources\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
