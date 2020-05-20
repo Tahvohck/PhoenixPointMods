@@ -1,0 +1,15 @@
+{
+  "Id": "Tahvohck.BetterItemInfo",
+  "Author": "",
+  "Name": "Better Item Info",
+  "Description": "",
+  //"Version": "0.1", // Explicit Version info. Defaults to the DLL version if you leave this commented.
+  "LoadIndex": 500,   // Negative priorities => higher priorities
+  "Duration": null,
+  "lang": "*",
+  "Contact": null,  // Freestyle dictionary
+  "Url": null,      // Freestyle dictionary
+  "Requires": [],
+  "Disables": [],
+  "ConfigType": "BetterItemInfo.ModConfig"
+}

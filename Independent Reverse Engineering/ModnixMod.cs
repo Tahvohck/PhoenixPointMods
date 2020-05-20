@@ -47,9 +47,7 @@ namespace Independent_Reverse_Engineering
             BasicUtil.EnsureAPI(ref api);
             BasicUtil.GetConfig(ref Config, api);
 
-            api("log info", "New MainMod initialized");
             DefRepository gameRootDef = GameUtl.GameComponent<DefRepository>();
-
             List<TacticalItemDef> tacticalItems = gameRootDef.GetAllDefs<TacticalItemDef>().ToList().FindAll(
                 new Predicate<TacticalItemDef>(FilterDefList)
             );

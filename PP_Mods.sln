@@ -11,10 +11,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModnixUtils", "ModnixUtils\ModnixUtils.csproj", "{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Independent Reverse Engineering", "Independent Reverse Engineering\Independent Reverse Engineering.csproj", "{3417E05A-9F97-452B-97D6-E3F573F8315C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8} = {6866A0C1-1FD4-44FB-A3B2-B782CB26E3B8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_TEMPLATE PP_ModnixMod", "_TEMPLATE PP_ModnixMod\_TEMPLATE PP_ModnixMod.csproj", "{0A1FC1CD-BF7C-4E4D-BE90-D8D3A5DFC374}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_TEMPLATE PP_ModnixMod (VSIX)", "VSIXProject1\_TEMPLATE PP_ModnixMod (VSIX).csproj", "{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterItemInfo", "BetterItemInfo\BetterItemInfo.csproj", "{DF346558-92A2-4D1C-86B9-A8D56D0BAADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +45,10 @@ Global
 		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA11BB3-7E7E-4E8D-8FC9-59A57A1506AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF346558-92A2-4D1C-86B9-A8D56D0BAADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF346558-92A2-4D1C-86B9-A8D56D0BAADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF346558-92A2-4D1C-86B9-A8D56D0BAADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF346558-92A2-4D1C-86B9-A8D56D0BAADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
