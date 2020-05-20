@@ -34,6 +34,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>G:\Games\Phoenix Point\PhoenixPointWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="ModnixUtils">
+      <HintPath>..\_Resources\ModnixUtils.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,13 +57,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ModnixUtils\ModnixUtils.csproj">
-      <Project>{6866a0c1-1fd4-44fb-a3b2-b782cb26e3b8}</Project>
-      <Name>ModnixUtils</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\mod_info.json" />
