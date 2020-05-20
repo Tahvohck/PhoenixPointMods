@@ -70,4 +70,16 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>:: Redirect stderr to null to hide dir already exists error.
+md "$(SolutionDir)_Resources" 2&gt; nul
+
+:: Include release type if not Release
+IF "$(ConfigurationName)"=="Release" (
+    echo RELEASE BUILD
+    cp "$(TargetPath)" "$(SolutionDir)_Resources\$(TargetFileName)"
+) ELSE (
+    cp "$(TargetPath)" "$(SolutionDir)_Resources\$(TargetName)-$(ConfigurationName)$(TargetExt)"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
